@@ -1,4 +1,4 @@
-package main.java;
+package uet.oop.entities;
 
 import javafx.scene.canvas.GraphicsContext;
 
