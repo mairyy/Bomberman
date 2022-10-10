@@ -1,31 +1,39 @@
-package main.java;
+package uet.oop.entities;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+import java.util.List;
+
 
 public abstract class MoveEntity extends Entity {
-    private int velocityX;
-    private int velocityY;
-    private boolean die;
+
+    protected int velocity;
+    protected boolean die;
+    protected int realPositionX;
+    protected int realPositionY;
 
     public MoveEntity() {
         super();
-        velocityX = 0;
-        velocityY = 0;
+        velocity = 2;
         die = false;
     }
 
-    public void setVelocityX(int velocityX) {
-        this.velocityX = velocityX;
+    public int getRealPositionX() {
+        return realPositionX;
     }
 
-    public int getVelocityX() {
-        return velocityX;
+    public int getRealPositionY() {
+        return realPositionY;
     }
 
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
     }
 
-    public int getVelocityY() {
-        return velocityY;
+    public int getVelocity() {
+        return velocity;
     }
 
     public boolean isDie() {
@@ -36,8 +44,4 @@ public abstract class MoveEntity extends Entity {
         this.die = die;
     }
 
-    public void move(double time) {
-        positionX += time * velocityX;
-        positionY += time * velocityY;
-    }
 }
