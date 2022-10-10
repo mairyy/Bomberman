@@ -1,6 +1,7 @@
-package main.java;
+package uet.oop.entities;
 
 import javafx.scene.canvas.GraphicsContext;
+import uet.oop.Main;
 
 import java.io.*;
 import java.util.ArrayList;
