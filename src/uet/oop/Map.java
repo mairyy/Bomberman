@@ -1,9 +1,8 @@
 package uet.oop;
 
 import javafx.scene.input.KeyCode;
-import main.entity.*;
+import uet.oop.entities.*;
 import javafx.scene.canvas.GraphicsContext;
-import main.entity.Entity;
 
 import java.io.*;
 import java.util.ArrayList;
