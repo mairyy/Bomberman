@@ -1,4 +1,4 @@
-package main.java;
+package uet.oop.entities;
 
 import com.sun.prism.Graphics;
 import javafx.geometry.Rectangle2D;
@@ -7,11 +7,11 @@ import javafx.scene.image.Image;
 
 
 public abstract class Entity {
-    Image image;
-    int positionX;
-    int positionY;
-    int width;
-    int height;
+    protected Image image;
+    protected int positionX;
+    protected int positionY;
+    protected int width;
+    protected int height;
 
     public Entity() {
         positionX = 0;
@@ -57,7 +57,9 @@ public abstract class Entity {
         height = (int) image.getHeight();
     }
 
-    public abstract void render(GraphicsContext gc);
+    public  void render(GraphicsContext gc) {
+        gc.drawImage(image, positionX, positionY, width, height);
+    }
 
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);
