@@ -1,5 +1,6 @@
 package main.java;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,14 +11,14 @@ import javafx.stage.Stage;
 
 // Status
 enum STATUS {
-    START, HELPMENU, HIGHSCORE, SETTINGS
+    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP
 }
 
 public class BombermanGame extends Application {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
-    public static STATUS status;
+    public static STATUS status = STATUS.MAIN;
 
     public static void main(String[] agrs) {
         Application.launch(BombermanGame.class);
@@ -37,10 +38,33 @@ public class BombermanGame extends Application {
         clearScreen(gc);
 
         Menu m = new Menu();
-        m.loadButton(gc);
+        m.loadButton();
+        m.createCircleButton();
         m.renderButton(gc);
-
+        m.handleButton(gc);
+        HelpLayer h = new HelpLayer();
+        h.load();
         theStage.show();
+        AnimationTimer time = new AnimationTimer() {
+            public void handle(long currentTime) {
+                if (status.equals(STATUS.HELPMENU)) {
+                    clearScreen(gc);
+                    h.render(gc);
+                    status = STATUS.STOP;
+                }
+                if (status.equals(STATUS.BACK)) {
+                    clearScreen(gc);
+                    root.getChildren().remove(Menu.backButton.circle);
+                    m.renderButton(gc);
+                    status = STATUS.STOP;
+                }
+            }
+        };
+
+        time.start();
+        if (status.equals(STATUS.STOP)) time.stop();
+
+
     }
 
     public static void clearScreen(GraphicsContext gc) {

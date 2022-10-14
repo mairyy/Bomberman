@@ -18,42 +18,45 @@ public class Menu {
     public static Button helpButton = new Button(buttonImage, 140, 15, 210, 245, true);
     public static Button highScoreButton = new Button(buttonImage, 260, -63, 210, 320, true);
     public static Button settingButton = new Button(buttonImage, 600, 450, 20, 245, true);
+    public static Button backButton = new Button(buttonImage, 700, 100, 20, 90, true);
     public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
     public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
 
     public void createCircleButton() {
         startButton.circle = new Circle(520, 400, 45);
         startButton.circle.setFill(new ImagePattern(startButton.cropImage()));
-        BombermanGame.root.getChildren().add(startButton.circle);
 
         helpButton.circle = new Circle(520, 550, 45);
         helpButton.circle.setFill(new ImagePattern(helpButton.cropImage()));
-        BombermanGame.root.getChildren().add(helpButton.circle);
 
         highScoreButton.circle = new Circle(670, 545, 45);
         highScoreButton.circle.setFill(new ImagePattern(highScoreButton.cropImage()));
-        BombermanGame.root.getChildren().add(highScoreButton.circle);
 
         settingButton.circle = new Circle(670, 400, 45);
         settingButton.circle.setFill(new ImagePattern(settingButton.cropImage()));
-        BombermanGame.root.getChildren().add(settingButton.circle);
+
+        backButton.circle = new Circle(50, 720, 45);
+        backButton.circle.setFill(new ImagePattern(Menu.backButton.cropImage()));
 
         circleButtons.add(startButton);
         circleButtons.add(helpButton);
         circleButtons.add(highScoreButton);
         circleButtons.add(settingButton);
+        circleButtons.add(backButton);
     }
 
-    public void loadButton(GraphicsContext gc) {
+    public void loadButton() {
         playerBgImage1.load();
         textBg.load();
-        createCircleButton();
-        handleButton(gc);
     }
 
     public void renderButton(GraphicsContext gc) {
         playerBgImage1.render(gc);
         textBg.render(gc);
+        BombermanGame.root.getChildren().add(startButton.circle);
+        BombermanGame.root.getChildren().add(helpButton.circle);
+        BombermanGame.root.getChildren().add(settingButton.circle);
+        BombermanGame.root.getChildren().add(highScoreButton.circle);
     }
 
     public void handleButton(GraphicsContext gc) {
