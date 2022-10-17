@@ -35,7 +35,7 @@ public class Menu {
         settingButton.circle = new Circle(670, 400, 45);
         settingButton.circle.setFill(new ImagePattern(settingButton.cropImage()));
 
-        backButton.circle = new Circle(50, 720, 45);
+        backButton.circle = new Circle(70, 740, 45);
         backButton.circle.setFill(new ImagePattern(Menu.backButton.cropImage()));
 
         circleButtons.add(startButton);
@@ -90,9 +90,7 @@ public class Menu {
             circleButtons.get(index).circle.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    for (int i = 0; i < circleButtons.size(); i++) {
-                        circleButtons.get(i).circle.setEffect(null);
-                    }
+                    circleButtons.get(index).circle.setEffect(null);
                 }
             });
         }

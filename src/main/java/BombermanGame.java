@@ -14,11 +14,16 @@ enum STATUS {
     START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP
 }
 
+enum LEVEL {
+    EASY, MEDIUM, HARD, NONE
+}
+
 public class BombermanGame extends Application {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
     public static STATUS status = STATUS.MAIN;
+    public static LEVEL level = LEVEL.NONE;
 
     public static void main(String[] agrs) {
         Application.launch(BombermanGame.class);
@@ -44,6 +49,8 @@ public class BombermanGame extends Application {
         m.handleButton(gc);
         HelpLayer h = new HelpLayer();
         h.load();
+        LevelLayer l = new LevelLayer();
+
         theStage.show();
         AnimationTimer time = new AnimationTimer() {
             public void handle(long currentTime) {
@@ -55,7 +62,19 @@ public class BombermanGame extends Application {
                 if (status.equals(STATUS.BACK)) {
                     clearScreen(gc);
                     root.getChildren().remove(Menu.backButton.circle);
+                    if(root.getChildren().contains(LevelLayer.easyButton.rectangle)) {
+                        root.getChildren().remove(LevelLayer.easyButton.rectangle);
+                        root.getChildren().remove(LevelLayer.normalButton.rectangle);
+                        root.getChildren().remove(LevelLayer.hardButton.rectangle);
+                    }
                     m.renderButton(gc);
+                    status = STATUS.STOP;
+                }
+                if (status.equals(STATUS.START)) {
+                    clearScreen(gc);
+                    l.createLevelButton();
+                    l.renderLevelButton();
+                    l.handleLevelButton(gc);
                     status = STATUS.STOP;
                 }
             }
