@@ -9,7 +9,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-// Status
 enum STATUS {
     START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP
 }
@@ -18,12 +17,22 @@ enum LEVEL {
     EASY, MEDIUM, HARD, NONE
 }
 
+enum MUSIC {
+    ON, OFF
+}
+
+enum SOUND {
+    ON, OFF
+}
+
 public class BombermanGame extends Application {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
     public static STATUS status = STATUS.MAIN;
     public static LEVEL level = LEVEL.NONE;
+    public static MUSIC music = MUSIC.ON;
+    public static SOUND sound = SOUND.ON;
 
     public static void main(String[] agrs) {
         Application.launch(BombermanGame.class);
@@ -50,6 +59,7 @@ public class BombermanGame extends Application {
         HelpLayer h = new HelpLayer();
         h.load();
         LevelLayer l = new LevelLayer();
+        SettingsLayer s = new SettingsLayer();
 
         theStage.show();
         AnimationTimer time = new AnimationTimer() {
@@ -67,6 +77,10 @@ public class BombermanGame extends Application {
                         root.getChildren().remove(LevelLayer.normalButton.rectangle);
                         root.getChildren().remove(LevelLayer.hardButton.rectangle);
                     }
+                    if(root.getChildren().contains(Menu.musicButton.circle)) {
+                        root.getChildren().remove(Menu.musicButton.circle);
+                        root.getChildren().remove(Menu.soundButton.circle);
+                    }
                     m.renderButton(gc);
                     status = STATUS.STOP;
                 }
@@ -77,12 +91,16 @@ public class BombermanGame extends Application {
                     l.handleLevelButton(gc);
                     status = STATUS.STOP;
                 }
+                if (status.equals(STATUS.SETTINGS)) {
+                    clearScreen(gc);
+                    s.renderButton();
+                    status = STATUS.STOP;
+                }
             }
         };
 
         time.start();
         if (status.equals(STATUS.STOP)) time.stop();
-
 
     }
 

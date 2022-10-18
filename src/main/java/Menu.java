@@ -19,6 +19,8 @@ public class Menu {
     public static Button highScoreButton = new Button(buttonImage, 260, -63, 210, 320, true);
     public static Button settingButton = new Button(buttonImage, 600, 450, 20, 245, true);
     public static Button backButton = new Button(buttonImage, 700, 100, 20, 90, true);
+    public static Button musicButton = new Button(buttonImage, 500, 100, 310, 320, true);
+    public static Button soundButton = new Button(buttonImage, 500, 100, 120, 245, true);
     public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
     public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
 
@@ -36,13 +38,21 @@ public class Menu {
         settingButton.circle.setFill(new ImagePattern(settingButton.cropImage()));
 
         backButton.circle = new Circle(70, 740, 45);
-        backButton.circle.setFill(new ImagePattern(Menu.backButton.cropImage()));
+        backButton.circle.setFill(new ImagePattern(backButton.cropImage()));
+
+        musicButton.circle = new Circle(320, 355, 45);
+        musicButton.circle.setFill(new ImagePattern(musicButton.cropImage()));
+
+        soundButton.circle = new Circle(480, 360, 45);
+        soundButton.circle.setFill(new ImagePattern(soundButton.cropImage()));
 
         circleButtons.add(startButton);
         circleButtons.add(helpButton);
         circleButtons.add(highScoreButton);
         circleButtons.add(settingButton);
         circleButtons.add(backButton);
+        circleButtons.add(musicButton);
+        circleButtons.add(soundButton);
     }
 
     public void loadButton() {
@@ -66,8 +76,34 @@ public class Menu {
             circleButtons.get(index).circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    BombermanGame.status = STATUS.values()[index];
-                    System.out.println(BombermanGame.status);
+                    // index < 5 là các nút ở màn hình chính và nút back
+                    if (index < 5) BombermanGame.status = STATUS.values()[index];
+                    // index = 5 là nút music, index = 6 là nút sound
+                    else if (index == 5) {
+                        if (BombermanGame.music.equals(MUSIC.OFF)) {
+                            circleButtons.get(index).image = buttonImage;
+                            circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
+                            BombermanGame.music = MUSIC.ON;
+                        } else {
+                            circleButtons.get(index).image = new Image("Button/button (1).png");
+                            circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
+                            BombermanGame.music = MUSIC.OFF;
+                        }
+                    } else {
+                        if (BombermanGame.sound.equals(SOUND.OFF)) {
+                            circleButtons.get(index).image = buttonImage;
+                            circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
+                            BombermanGame.sound = SOUND.ON;
+                        } else {
+                            circleButtons.get(index).image = new Image("Button/button (1).png");
+                            circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
+                            BombermanGame.sound = SOUND.OFF;
+                        }
+                    }
+                    System.out.println("status " + BombermanGame.status);
+                    System.out.println("level " + BombermanGame.level);
+                    System.out.println("music " + BombermanGame.music);
+                    System.out.println("sound " + BombermanGame.sound);
                 }
             });
 
