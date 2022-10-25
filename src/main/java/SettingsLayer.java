@@ -1,5 +1,7 @@
 package main.java;
 
+
+
 public class SettingsLayer {
     public static void renderButton() {
         BombermanGame.root.getChildren().remove(Menu.helpButton.circle);

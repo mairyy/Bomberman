@@ -8,8 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 public class Menu {
     public ArrayList<Button> circleButtons = new ArrayList<Button>();

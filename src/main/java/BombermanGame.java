@@ -2,15 +2,22 @@ package main.java;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.java.gamePlay.GamePlay;
+import main.java.Menu;
+import main.java.Button;
+import main.java.HelpLayer;
+import main.java.LevelLayer;
+import main.java.SettingsLayer;
 
 enum STATUS {
-    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP
+    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP, GAMEPLAY
 }
 
 enum LEVEL {
@@ -25,7 +32,10 @@ enum SOUND {
     ON, OFF
 }
 
+
+
 public class BombermanGame extends Application {
+    private GamePlay game = new GamePlay();
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
@@ -34,12 +44,15 @@ public class BombermanGame extends Application {
     public static MUSIC music = MUSIC.ON;
     public static SOUND sound = SOUND.ON;
 
-    public static void main(String[] agrs) {
-        Application.launch(BombermanGame.class);
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
     public void start(Stage theStage) {
+        game.start(theStage);
+    }
+    public void menu(Stage theStage) {
         theStage.setTitle("Bomberman");
 
         Scene theScene = new Scene(root);
@@ -89,6 +102,8 @@ public class BombermanGame extends Application {
                     l.createLevelButton();
                     l.renderLevelButton();
                     l.handleLevelButton(gc);
+                    System.out.println(level);
+                    System.out.println(level);
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.SETTINGS)) {
@@ -96,12 +111,19 @@ public class BombermanGame extends Application {
                     s.renderButton();
                     status = STATUS.STOP;
                 }
+                if (status.equals(STATUS.GAMEPLAY)) {
+                    System.out.println(1);
+                    game.start(theStage);
+                }
+
             }
         };
 
         time.start();
-        if (status.equals(STATUS.STOP)) time.stop();
-
+        if (status.equals(STATUS.STOP)) {
+            System.out.println(1);
+            time.stop();
+        }
     }
 
     public static void clearScreen(GraphicsContext gc) {
