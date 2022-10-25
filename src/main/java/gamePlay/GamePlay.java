@@ -22,29 +22,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GamePlay extends Application {
+public class GamePlay {
     public final static int widthUnit =  50;
-    public static int widthScreen;
-    public static int heightScreen;
+    public static Map map = new Map();
+    public static SoundGame soundGame = new SoundGame();
+    public static List<KeyCode> events = new ArrayList<>();
 
-    @Override
-    public void start(Stage stage)  {
-        stage.setTitle("Bomberman");
-        Group root = new Group();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+    public void start(Stage stage, Scene scene, GraphicsContext gc)  {
         File file = new File("res/resource/map/map1.txt");
-        Map map = new Map();
         map.loadMap(file);
-        SoundGame soundGame = new SoundGame();
-        widthScreen = map.getLenWidth()*widthUnit;
-        heightScreen = map.getLenHeight()*widthUnit;
-        Canvas canvas = new Canvas(widthScreen, heightScreen);
-        root.getChildren().add(canvas);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        //handle event.
-        List<KeyCode> events = new ArrayList<>();
+        //handle key event.
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
                     @Override
@@ -63,17 +51,6 @@ public class GamePlay extends Application {
                     }
                 }
         );
-        final Long[] startNanotime = {System.nanoTime()};
-        new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                double time = 1.0* (l - startNanotime[0]) / 1000000000;
-                startNanotime[0] = l;
-                map.update(time, events);
-                soundGame.playSound(map, events);
-                map.render(gc);
-            }
-        }.start();
 
         stage.show();
     }

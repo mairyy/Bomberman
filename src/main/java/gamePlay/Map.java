@@ -1,6 +1,8 @@
 package main.java.gamePlay;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import main.java.BombermanGame;
 import main.java.gamePlay.entity.*;
 import javafx.scene.canvas.GraphicsContext;
 import main.java.gamePlay.entity.Entity;
@@ -140,8 +142,11 @@ public class Map {
     }
 
     public void render(GraphicsContext gc) {
-        gc.clearRect(0,0, 800, 800);
-        background.render(gc, GamePlay.widthScreen, GamePlay.heightScreen);
+//        gc.clearRect(0,0, 800, 800);
+//        background.render(gc, GamePlay.widthScreen, GamePlay.heightScreen);
+        Color color = Color.rgb(0, 255, 0);
+        gc.setFill(color);
+        gc.fillRect(0, 0, BombermanGame.SCREEN_WIDTH, BombermanGame.SCREEN_HEIGHT);
         teleport.render(gc);
         for (Item item : items) {
             item.render(gc);
