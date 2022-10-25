@@ -51,6 +51,7 @@ public class LevelLayer {
                 @Override
                 public void handle(MouseEvent event) {
                     BombermanGame.level = LEVEL.values()[index];
+                    BombermanGame.status = STATUS.GAMEPLAY;
                     System.out.println(BombermanGame.level);
                 }
             });
