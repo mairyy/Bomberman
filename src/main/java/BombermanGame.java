@@ -76,6 +76,7 @@ public class BombermanGame extends Application {
         game.start(theStage, theScene, gc);
 
         theStage.show();
+        final Long[] startNanotime = {System.nanoTime()};
         AnimationTimer time = new AnimationTimer() {
             public void handle(long currentTime) {
                 if (status.equals(STATUS.HELPMENU)) {
@@ -112,14 +113,12 @@ public class BombermanGame extends Application {
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.GAMEPLAY)) {
-                    System.out.println(1);
                     clearScreen(gc);
                     root.getChildren().remove(Menu.backButton.circle);
                     root.getChildren().remove(LevelLayer.easyButton.rectangle);
                     root.getChildren().remove(LevelLayer.normalButton.rectangle);
                     root.getChildren().remove(LevelLayer.hardButton.rectangle);
 //                    game.start(theStage, theScene, gc);
-                    final Long[] startNanotime = {System.nanoTime()};
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
                     GamePlay.map.update(time, GamePlay.events);
