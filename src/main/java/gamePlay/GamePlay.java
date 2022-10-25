@@ -25,7 +25,6 @@ import java.util.List;
 public class GamePlay {
     public final static int widthUnit =  50;
     public static Map map = new Map();
-    public static SoundGame soundGame = new SoundGame();
     public static List<KeyCode> events = new ArrayList<>();
 
     public void start(Stage stage, Scene scene, GraphicsContext gc)  {

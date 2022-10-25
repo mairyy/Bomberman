@@ -12,12 +12,17 @@ import java.io.File;
 public class SoundGame {
     final private MediaPlayer soundPlayerMove;
     final private MediaPlayer soundPlayerDead;
+    final private MediaPlayer musicMenu;
+    final private MediaPlayer soundClick;
     public SoundGame () {
         Media newSound = new Media(new File("res/resource/music/Sounds/Player/playerMove.wav").toURI().toString());
         soundPlayerMove = new MediaPlayer(newSound);
         newSound = new Media(new File("res/resource/music/Sounds/Player/Player Dead.wav").toURI().toString());
         soundPlayerDead = new MediaPlayer(newSound);
-
+        newSound = new Media(new File("res/resource/music/Music/sound_game.mp3").toURI().toString());
+        musicMenu = new MediaPlayer(newSound);
+        newSound = new Media(new File("res/resource/music/Sounds/Menu/soundClick.wav").toURI().toString());
+        soundClick = new MediaPlayer(newSound);
     }
 
     public void playSoundMove(List<KeyCode> events) {
@@ -42,8 +47,18 @@ public class SoundGame {
         }
     }
 
+    public void playSoundMenu() {
+        musicMenu.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                soundPlayerMove.seek(Duration.ZERO);
+            }
+        });
+        musicMenu.play();
+    }
 
     public void playSound(Map map, List<KeyCode> events) {
+        musicMenu.stop();
         playSoundMove(events);
         playSoundPlayerDead(map);
         for(int i = 0; i < map.boms.size(); i++) {

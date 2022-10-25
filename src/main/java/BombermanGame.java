@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.java.gamePlay.GamePlay;
+import main.java.gamePlay.SoundGame;
 import main.java.Menu;
 import main.java.Button;
 import main.java.HelpLayer;
@@ -36,6 +37,7 @@ enum SOUND {
 
 public class BombermanGame extends Application {
     private GamePlay game = new GamePlay();
+    private SoundGame soundGame = new SoundGame();
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
@@ -118,12 +120,19 @@ public class BombermanGame extends Application {
                     root.getChildren().remove(LevelLayer.easyButton.rectangle);
                     root.getChildren().remove(LevelLayer.normalButton.rectangle);
                     root.getChildren().remove(LevelLayer.hardButton.rectangle);
-//                    game.start(theStage, theScene, gc);
+                    //game.start(theStage, theScene, gc);
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
                     GamePlay.map.update(time, GamePlay.events);
-                    GamePlay.soundGame.playSound(GamePlay.map, GamePlay.events);
                     GamePlay.map.render(gc);
+                }
+                if(music.equals(MUSIC.ON)) {
+                    if(status == STATUS.GAMEPLAY) {
+                        soundGame.playSound(GamePlay.map, GamePlay.events);
+                    }
+                    else {
+                        soundGame.playSoundMenu();
+                    }
                 }
             }
         };
