@@ -50,7 +50,7 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage theStage) {
-        game.start(theStage);
+        menu(theStage);
     }
     public void menu(Stage theStage) {
         theStage.setTitle("Bomberman");
@@ -73,6 +73,7 @@ public class BombermanGame extends Application {
         h.load();
         LevelLayer l = new LevelLayer();
         SettingsLayer s = new SettingsLayer();
+        game.start(theStage, theScene, gc);
 
         theStage.show();
         AnimationTimer time = new AnimationTimer() {
@@ -103,7 +104,6 @@ public class BombermanGame extends Application {
                     l.renderLevelButton();
                     l.handleLevelButton(gc);
                     System.out.println(level);
-                    System.out.println(level);
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.SETTINGS)) {
@@ -113,9 +113,19 @@ public class BombermanGame extends Application {
                 }
                 if (status.equals(STATUS.GAMEPLAY)) {
                     System.out.println(1);
-                    game.start(theStage);
+                    clearScreen(gc);
+                    root.getChildren().remove(Menu.backButton.circle);
+                    root.getChildren().remove(LevelLayer.easyButton.rectangle);
+                    root.getChildren().remove(LevelLayer.normalButton.rectangle);
+                    root.getChildren().remove(LevelLayer.hardButton.rectangle);
+//                    game.start(theStage, theScene, gc);
+                    final Long[] startNanotime = {System.nanoTime()};
+                    double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
+                    startNanotime[0] = currentTime;
+                    GamePlay.map.update(time, GamePlay.events);
+                    GamePlay.soundGame.playSound(GamePlay.map, GamePlay.events);
+                    GamePlay.map.render(gc);
                 }
-
             }
         };
 
