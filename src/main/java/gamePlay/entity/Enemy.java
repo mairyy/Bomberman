@@ -1,17 +1,13 @@
 package gamePlay.entity;
 
 import gamePlay.entity.BFS.Point;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import BombermanGame;
+import MenuGame.BombermanGame;
 import gamePlay.GamePlay;
 import gamePlay.entity.BFS.BFS;
 import gamePlay.utils.ImageUtils;
 import gamePlay.Map;
-import gamePlay.entity.MoveEntity;
-import gamePlay.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
