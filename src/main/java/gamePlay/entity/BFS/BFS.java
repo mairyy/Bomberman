@@ -1,4 +1,4 @@
-package main.java.gamePlay.entity.BFS;
+package gamePlay.entity.BFS;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,7 +31,7 @@ public class BFS {
     }
 
     // Function to perform the BFS traversal
-    public static void findPath(int grid[][], boolean vis[][], int row, int col, int rowDes, int colDes) {
+    public static List<Point> findPath(int grid[][], boolean vis[][], int row, int col, int rowDes, int colDes) {
 
         // Stores indices of the matrix cells
         Queue<List<Point>> queue = new LinkedList<>();
@@ -50,7 +50,7 @@ public class BFS {
 
             // fìnd
             if (last.x == rowDes && last.y == colDes) {
-                printPath(path);
+                return path;
             }
 
             int x = last.x;

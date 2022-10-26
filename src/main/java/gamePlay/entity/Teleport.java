@@ -1,10 +1,10 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import main.java.gamePlay.Map;
-import main.utils.ImageUtils;
-
+import gamePlay.Map;
+import gamePlay.utils.ImageUtils;
+import gamePlay.entity.Entity;
 public class Teleport extends Entity {
     private Map map;
     private double frame = 0;

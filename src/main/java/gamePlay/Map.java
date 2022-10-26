@@ -1,17 +1,23 @@
-package main.java.gamePlay;
+package gamePlay;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import main.java.BombermanGame;
-import main.java.gamePlay.entity.*;
+import gamePlay.GamePlay;
+import gamePlay.entity.Entity;
 import javafx.scene.canvas.GraphicsContext;
-import main.java.gamePlay.entity.Entity;
-import main.entity.Item.AddBom;
-import main.entity.Item.Item;
-import main.entity.Item.PowerUpBom;
-import main.entity.Item.PowerUpSpeed;
-import main.java.gamePlay.GamePlay;
 
+import gamePlay.GamePlay;
+import gamePlay.entity.Player;
+import gamePlay.entity.Background;
+import gamePlay.entity.Enemy;
+import gamePlay.entity.Teleport;
+import gamePlay.entity.Bom;
+import gamePlay.entity.Brick;
+import gamePlay.entity.Wall;
+import gamePlay.entity.Item.PowerUpSpeed;
+import gamePlay.entity.Item.AddBom;
+import gamePlay.entity.Item.PowerUpBom;
+import gamePlay.entity.Item.Item;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +79,7 @@ public class Map {
                             arrMap[i][j] = 1;
                             break;
                         case 04:
-                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit));
+                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 1;
                             break;
                         case 07:
@@ -146,7 +152,7 @@ public class Map {
 //        background.render(gc, GamePlay.widthScreen, GamePlay.heightScreen);
         Color color = Color.rgb(0, 255, 0);
         gc.setFill(color);
-        gc.fillRect(0, 0, BombermanGame.SCREEN_WIDTH, BombermanGame.SCREEN_HEIGHT);
+        gc.fillRect(0, 0, 800, 800);
         teleport.render(gc);
         for (Item item : items) {
             item.render(gc);
@@ -156,7 +162,7 @@ public class Map {
         }
         for (int i = 0; i < enemies.size(); i++) {
             if(!enemies.get(i).isEndGame()) {
-                enemies.get(i).move(arrMap);
+                enemies.get(i).move();
                 enemies.get(i).render(gc);
                 if (enemies.get(i).isColling(player)) {
                     player.setDestroy(true);

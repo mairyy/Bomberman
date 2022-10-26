@@ -1,7 +1,7 @@
-package main.entity.Item;
+package gamePlay.entity.Item;
 
-import main.java.gamePlay.Map;
-import main.java.gamePlay.entity.Entity;
+import gamePlay.Map;
+import gamePlay.entity.Entity;
 
 public class Item extends Entity {
     protected Map map;

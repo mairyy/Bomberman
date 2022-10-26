@@ -1,21 +1,18 @@
-package main.java;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import main.java.gamePlay.GamePlay;
-import main.java.gamePlay.SoundGame;
-import main.java.Menu;
-import main.java.Button;
-import main.java.HelpLayer;
-import main.java.LevelLayer;
-import main.java.SettingsLayer;
+import gamePlay.GamePlay;
+import gamePlay.SoundGame;
+import MenuGame.Menu;
+import MenuGame.HelpLayer;
+import MenuGame.LevelLayer;
+import MenuGame.SettingsLayer;
 
 enum STATUS {
     START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP, GAMEPLAY

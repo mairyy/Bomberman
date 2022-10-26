@@ -1,21 +1,13 @@
-package main.java;
+package MenuGame;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-public class HelpLayer {
-    public static Sprite helpLayerImage = new Sprite(new Image("helpLayer.png"), 0, 0, 0, 0, 800, 800);
-
-    public void load() {
-        helpLayerImage.load();
-    }
-
-    public void render(GraphicsContext gc) {
+public class SettingsLayer {
+    public static void renderButton() {
         BombermanGame.root.getChildren().remove(Menu.helpButton.circle);
         BombermanGame.root.getChildren().remove(Menu.settingButton.circle);
         BombermanGame.root.getChildren().remove(Menu.highScoreButton.circle);
         BombermanGame.root.getChildren().remove(Menu.startButton.circle);
-        helpLayerImage.render(gc);
+        BombermanGame.root.getChildren().add(Menu.musicButton.circle);
+        BombermanGame.root.getChildren().add(Menu.soundButton.circle);
         BombermanGame.root.getChildren().add(Menu.backButton.circle);
     }
 }

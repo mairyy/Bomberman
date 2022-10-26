@@ -1,4 +1,4 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import com.sun.prism.Graphics;
 import javafx.geometry.Rectangle2D;

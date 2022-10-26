@@ -1,10 +1,11 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import main.java.gamePlay.GamePlay;
-import main.java.gamePlay.Map;
-import main.utils.ImageUtils;
+import gamePlay.GamePlay;
+import gamePlay.Map;
+import gamePlay.utils.ImageUtils;
+import gamePlay.entity.Entity;
 
 import java.util.List;
 

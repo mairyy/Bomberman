@@ -1,10 +1,10 @@
-package main.entity.Item;
+package gamePlay.entity.Item;
 
 import javafx.scene.image.Image;
-import main.java.gamePlay.GamePlay;
-import main.java.gamePlay.Map;
-import main.java.gamePlay.entity.Bom;
-import main.utils.ImageUtils;
+import gamePlay.GamePlay;
+import gamePlay.Map;
+import gamePlay.entity.Bom;
+import gamePlay.utils.ImageUtils;
 
 import java.awt.*;
 

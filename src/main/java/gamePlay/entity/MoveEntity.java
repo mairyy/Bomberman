@@ -1,8 +1,9 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import gamePlay.entity.Entity;
 
 import java.util.List;
 

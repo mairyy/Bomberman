@@ -1,4 +1,4 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,10 +8,18 @@ import main.java.BombermanGame;
 import main.java.gamePlay.GamePlay;
 import main.java.gamePlay.entity.BFS.BFS;
 import main.utils.ImageUtils;
+import main.java.gamePlay.Map;
+import main.java.gamePlay.entity.MoveEntity;
+import main.java.gamePlay.entity.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
+enum StatusMove {
+    UP, DOWN, LEFT, RIGHT
+}
 public class Enemy extends MoveEntity {
     private int numberOfFrameAlive = 4;
     private int numberOfFrameDEAD = 5;
@@ -26,8 +34,9 @@ public class Enemy extends MoveEntity {
     public void setFrame(double frame) {
         this.frame = frame;
     }
+    private Map map;
 
-    public Enemy(int positionX, int positionY) {
+    public Enemy(int positionX, int positionY, Map map) {
         loadImage("resource/image/enemies.png");
         width = (int) (image.getWidth()/13);
         height = (int) 54;
@@ -49,6 +58,7 @@ public class Enemy extends MoveEntity {
         realPositionY = positionY;
         directionNumber = (int) (Math.random() * 2);
         velocity = 1;
+        this.map = map;
     }
 
 
@@ -63,11 +73,14 @@ public class Enemy extends MoveEntity {
             }
         }
     }
-   public void move(int[][] mapArr) {
+   public void move() {
        if(!isDestroy()) {
            setAnimationMove();
-           if (BombermanGame.level == BombermanGame.LEVEL.EASY) randomMove(mapArr);
+           if (BombermanGame.level == BombermanGame.LEVEL.EASY) {
+               randomMove(map.arrMap);
+           }
        }
+
    }
 
    public void setAnimationMove() {
@@ -137,6 +150,90 @@ public class Enemy extends MoveEntity {
     //xP, yP: player's position in map[][]
     public void AIMove(int[][] mapArr, int xE, int yE, int xP, int yP) {
         BFS bfs = new BFS();
+        List<main.java.gamePlay.entity.BFS.Point> path = new ArrayList<>();
         BFS.findPath(mapArr, bfs.visited, xE, yE, xP, yP);
+        StatusMove statusMove;
+        if (path.get(0).x * width != positionX) {
+            if (path.get(0).x * width > positionX) {
+                statusMove = StatusMove.RIGHT;
+            } else {
+                statusMove = StatusMove.LEFT;
+            }
+        } else {
+            if (path.get(0).y * height > positionY) {
+                statusMove = StatusMove.DOWN;
+            } else {
+                statusMove = StatusMove.UP;
+            }
+        }
+        handleMove(statusMove, mapArr);
+    }
+
+
+    public void handleMove(StatusMove statusMove, int[][] mapArr) {
+        if (!isDestroy()) {
+            if (statusMove == StatusMove.UP) {
+                if (positionY - velocity > (positionY / height) * height) {
+                    positionY -= velocity;
+                } else if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
+                    if (mapArr[positionY / height - 1][positionX / width + 1] == 1 &&
+                            mapArr[positionY / height - 1][positionX / width] == 1) {
+                        positionY -= velocity;
+                    } else {
+                        positionX = realPositionX;
+                        positionY -= velocity;
+                    }
+                } else if(positionY > (positionY / height) * height){
+                    positionY = (positionY / height) * height;
+                }
+            }
+            if (statusMove == StatusMove.DOWN) {
+                if (positionY + velocity < realPositionY) {
+                    positionY += velocity;
+                } else if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
+                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
+                            mapArr[positionY / height + 1][positionX / width] == 1) {
+                        positionY += velocity;
+                    } else {
+                        positionX = realPositionX;
+                        positionY += velocity;
+                    }
+                } else if (positionY < realPositionY) {
+                    positionY = realPositionY;
+                }
+            }
+            if (statusMove == StatusMove.LEFT) {
+                if (positionX - velocity > (positionX / width) * width) {
+                    positionX -= velocity;
+                } else if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
+                    if (mapArr[positionY / height + 1][positionX / width - 1] == 1 &&
+                            mapArr[positionY / height][positionX / width - 1] == 1) {
+                        positionX -= velocity;
+                    } else {
+                        positionY = realPositionY;
+                        positionX -= velocity;
+                    }
+                } else if (positionX > (positionX / width) * width) {
+                    positionX = (positionX / width) * width;
+                }
+            }
+            if (statusMove == StatusMove.RIGHT) {
+                if (positionX + velocity < realPositionX) {
+                    positionX += velocity;
+                } else if (positionX < realPositionX) {
+                    positionX = realPositionX;
+                } else if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
+                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
+                            mapArr[positionY / height][positionX / width + 1] == 1) {
+                        positionX += velocity;
+                    } else {
+                        positionY = realPositionY;
+                        positionX += velocity;
+                    }
+                }
+            }
+            realPositionX = ((positionX + width / 2) / width) * width;
+            realPositionY = ((positionY + height / 2) / height) * height;
+        }
     }
 }

@@ -1,11 +1,13 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import main.java.gamePlay.GamePlay;
-import main.utils.ImageUtils;
+import gamePlay.GamePlay;
+import gamePlay.utils.ImageUtils;
+import gamePlay.entity.MoveEntity;
+import gamePlay.entity.Entity;
 
 import java.util.List;
 
@@ -102,6 +104,7 @@ public class Player extends MoveEntity {
         }
     }
 
+    //move
     public void handleMove(List<KeyCode> events, int[][] mapArr) {
         if (!isDestroy()) {
             if (events.contains(KeyCode.UP)) {

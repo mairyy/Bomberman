@@ -1,4 +1,4 @@
-package main.java.gamePlay;
+package gamePlay;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import main.java.gamePlay.Map;
+import gamePlay.Map;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

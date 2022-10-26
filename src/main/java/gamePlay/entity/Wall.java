@@ -1,9 +1,10 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.scene.canvas.GraphicsContext;
-import main.utils.ImageUtils;
+import gamePlay.utils.ImageUtils;
 import javafx.scene.image.Image;
-import main.java.gamePlay.GamePlay;
+import gamePlay.GamePlay;
+import gamePlay.entity.Entity;
 
 public class Wall extends Entity{
     public Wall(int positionX, int positionY) {

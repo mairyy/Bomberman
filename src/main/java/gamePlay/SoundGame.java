@@ -1,4 +1,4 @@
-package main.java.gamePlay;
+package gamePlay;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.media.Media;
@@ -21,7 +21,7 @@ public class SoundGame {
         soundPlayerDead = new MediaPlayer(newSound);
         newSound = new Media(new File("res/resource/music/Music/sound_game.mp3").toURI().toString());
         musicMenu = new MediaPlayer(newSound);
-        newSound = new Media(new File("res/resource/music/Sounds/Menu/soundClick.wav").toURI().toString());
+        newSound = new Media(new File("res/resource/music/Sounds/MenuGame.Menu/soundClick.wav").toURI().toString());
         soundClick = new MediaPlayer(newSound);
     }
 

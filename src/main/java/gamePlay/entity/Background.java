@@ -1,7 +1,7 @@
-package main.java.gamePlay.entity;
+package gamePlay.entity;
 
 import javafx.scene.canvas.GraphicsContext;
-import main.java.gamePlay.GamePlay;
+import gamePlay.GamePlay;
 
 public class Background extends Entity {
     public Background() {
