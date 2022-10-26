@@ -1,5 +1,6 @@
 package gamePlay.entity;
 
+import gamePlay.entity.BFS.Point;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -150,7 +151,7 @@ public class Enemy extends MoveEntity {
     //xP, yP: player's position in map[][]
     public void AIMove(int[][] mapArr, int xE, int yE, int xP, int yP) {
         BFS bfs = new BFS();
-        List<main.java.gamePlay.entity.BFS.Point> path = new ArrayList<>();
+        List<Point> path = new ArrayList<>();
         BFS.findPath(mapArr, bfs.visited, xE, yE, xP, yP);
         StatusMove statusMove;
         if (path.get(0).x * width != positionX) {
