@@ -95,14 +95,14 @@ public abstract class MoveEntity extends Entity {
 
     public void moveLeft(int[][] mapArr) {
         if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
-            if (positionY < realPositionY) {
+            if (positionY > realPositionY) {
                 //moveUp(mapArr);
                 if (positionY - velocity > realPositionY) {
                     positionY -= velocity;
                 } else {
                     positionY = realPositionY;
                 }
-            } else if (positionY > realPositionY) {
+            } else if (positionY < realPositionY) {
                 //moveDown(mapArr);
                 if (positionY + velocity < realPositionY) {
                     positionY += velocity;
@@ -121,14 +121,14 @@ public abstract class MoveEntity extends Entity {
 
     public void moveRight(int[][] mapArr) {
         if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
-            if (positionY < realPositionY) {
+            if (positionY > realPositionY) {
                 //moveUp(mapArr);
                 if (positionY - velocity > realPositionY) {
                     positionY -= velocity;
                 } else {
                     positionY = realPositionY;
                 }
-            } else if (positionY > realPositionY) {
+            } else if (positionY < realPositionY) {
                 //moveDown(mapArr);
                 if (positionY + velocity < realPositionY) {
                     positionY += velocity;
