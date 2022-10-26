@@ -6,14 +6,21 @@ import java.util.List;
 import java.util.Queue;
 
 public class BFS {
-    static int mapRow = 16;
-    static int mapCol = 16;
-    public static boolean visited[][] = new boolean[mapRow][mapCol];
+    static int mapRow = 15;
+    static int mapCol = 15;
+    public boolean visited[][] = new boolean[mapRow][mapCol];
 
     // Direction vectors
     static int dRow[] = { -1, 0, 1, 0 };
     static int dCol[] = { 0, 1, 0, -1 };
 
+    public void BFS() {
+        for (int i = 0; i < mapRow; i++) {
+            for (int j = 0; j < mapCol; j++) {
+                visited[i][j] = false;
+            }
+        }
+    }
     // Function to check if a cell
     // be visited or not
     static boolean isValid(int[][] map, boolean[][] visited, int row, int col) {
@@ -31,7 +38,7 @@ public class BFS {
     }
 
     // Function to perform the BFS traversal
-    public static List<Point> findPath(int grid[][], boolean vis[][], int row, int col, int rowDes, int colDes) {
+    public List<Point> findPath(int grid[][], int row, int col, int rowDes, int colDes) {
 
         // Stores indices of the matrix cells
         Queue<List<Point>> queue = new LinkedList<>();
@@ -42,9 +49,10 @@ public class BFS {
         path.add(new Point(row, col));
         // and push it into the queue
         queue.add(path);
-        vis[row][col] = true;
+        visited[row][col] = true;
 
         while (!queue.isEmpty()) {
+            //printPath(path);
             path = queue.poll();
             Point last = path.get(path.size() - 1);
 
@@ -59,16 +67,15 @@ public class BFS {
             for (int i = 0; i < 4; i++) {
                 int adjx = x + dRow[i];
                 int adjy = y + dCol[i];
-
-                if (isValid(grid, vis, adjx, adjy)) {
+                if (isValid(grid, visited, adjx, adjy)) {
                     List<Point> newPath = new ArrayList<>(path);
                     newPath.add(new Point(adjx, adjy));
                     queue.add(newPath);
-                    vis[adjx][adjy] = true;
+                    visited[adjx][adjy] = true;
                 }
             }
         }
-        return new ArrayList<Point>();
+        return path;
     }
 
     static void printPath(List<Point> path) {

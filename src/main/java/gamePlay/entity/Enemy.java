@@ -74,7 +74,7 @@ public class Enemy extends MoveEntity {
        if(!isDestroy()) {
            setAnimationMove();
            if (BombermanGame.level == BombermanGame.LEVEL.EASY) {
-               randomMove(map.arrMap);
+               AIMove(map.arrMap, realPositionY/width, realPositionX/height, map.player.realPositionY/width, map.player.realPositionX/height);
            }
        }
 
@@ -148,86 +148,42 @@ public class Enemy extends MoveEntity {
     public void AIMove(int[][] mapArr, int xE, int yE, int xP, int yP) {
         BFS bfs = new BFS();
         List<Point> path = new ArrayList<>();
-        BFS.findPath(mapArr, bfs.visited, xE, yE, xP, yP);
+        path = bfs.findPath(mapArr, xE, yE, xP, yP);
         StatusMove statusMove;
-        if (path.get(0).x * width != positionX) {
-            if (path.get(0).x * width > positionX) {
-                statusMove = StatusMove.RIGHT;
+        if(path.size() >= 2) {
+            if (path.get(1).y * width != positionX) {
+                if (path.get(1).y * width > positionX) {
+                    statusMove = StatusMove.RIGHT;
+                } else {
+                    statusMove = StatusMove.LEFT;
+                }
             } else {
-                statusMove = StatusMove.LEFT;
+                if (path.get(1).x * height > positionY) {
+                    statusMove = StatusMove.DOWN;
+                } else {
+                    statusMove = StatusMove.UP;
+                }
             }
+            handleMove(statusMove, mapArr);
         } else {
-            if (path.get(0).y * height > positionY) {
-                statusMove = StatusMove.DOWN;
-            } else {
-                statusMove = StatusMove.UP;
-            }
+            randomMove(map.arrMap);
         }
-        handleMove(statusMove, mapArr);
     }
 
 
     public void handleMove(StatusMove statusMove, int[][] mapArr) {
         if (!isDestroy()) {
-            if (statusMove == StatusMove.UP) {
-                if (positionY - velocity > (positionY / height) * height) {
-                    positionY -= velocity;
-                } else if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
-                    if (mapArr[positionY / height - 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height - 1][positionX / width] == 1) {
-                        positionY -= velocity;
-                    } else {
-                        positionX = realPositionX;
-                        positionY -= velocity;
-                    }
-                } else if(positionY > (positionY / height) * height){
-                    positionY = (positionY / height) * height;
-                }
+            if (statusMove.equals(StatusMove.UP)) {
+                moveUp(mapArr);
             }
-            if (statusMove == StatusMove.DOWN) {
-                if (positionY + velocity < realPositionY) {
-                    positionY += velocity;
-                } else if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height + 1][positionX / width] == 1) {
-                        positionY += velocity;
-                    } else {
-                        positionX = realPositionX;
-                        positionY += velocity;
-                    }
-                } else if (positionY < realPositionY) {
-                    positionY = realPositionY;
-                }
+            if (statusMove.equals(StatusMove.DOWN)) {
+                moveDown(mapArr);
             }
-            if (statusMove == StatusMove.LEFT) {
-                if (positionX - velocity > (positionX / width) * width) {
-                    positionX -= velocity;
-                } else if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width - 1] == 1 &&
-                            mapArr[positionY / height][positionX / width - 1] == 1) {
-                        positionX -= velocity;
-                    } else {
-                        positionY = realPositionY;
-                        positionX -= velocity;
-                    }
-                } else if (positionX > (positionX / width) * width) {
-                    positionX = (positionX / width) * width;
-                }
+            if (statusMove.equals(StatusMove.LEFT)) {
+                moveLeft(mapArr);
             }
-            if (statusMove == StatusMove.RIGHT) {
-                if (positionX + velocity < realPositionX) {
-                    positionX += velocity;
-                } else if (positionX < realPositionX) {
-                    positionX = realPositionX;
-                } else if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height][positionX / width + 1] == 1) {
-                        positionX += velocity;
-                    } else {
-                        positionY = realPositionY;
-                        positionX += velocity;
-                    }
-                }
+            if (statusMove.equals(StatusMove.RIGHT)) {
+                moveRight(mapArr);
             }
             realPositionX = ((positionX + width / 2) / width) * width;
             realPositionY = ((positionY + height / 2) / height) * height;
