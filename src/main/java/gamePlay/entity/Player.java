@@ -108,64 +108,16 @@ public class Player extends MoveEntity {
     public void handleMove(List<KeyCode> events, int[][] mapArr) {
         if (!isDestroy()) {
             if (events.contains(KeyCode.UP)) {
-                if (positionY - velocity > (positionY / height) * height) {
-                    positionY -= velocity;
-                } else if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
-                    if (mapArr[positionY / height - 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height - 1][positionX / width] == 1) {
-                        positionY -= velocity;
-                    } else {
-                        positionX = realPositionX;
-                        positionY -= velocity;
-                    }
-                } else if(positionY > (positionY / height) * height){
-                    positionY = (positionY / height) * height;
-                }
+                moveUp(mapArr);
             }
             if (events.contains(KeyCode.DOWN)) {
-                if (positionY + velocity < realPositionY) {
-                    positionY += velocity;
-                } else if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height + 1][positionX / width] == 1) {
-                        positionY += velocity;
-                    } else {
-                        positionX = realPositionX;
-                        positionY += velocity;
-                    }
-                } else if (positionY < realPositionY) {
-                    positionY = realPositionY;
-                }
+                moveDown(mapArr);
             }
             if (events.contains(KeyCode.LEFT)) {
-                if (positionX - velocity > (positionX / width) * width) {
-                    positionX -= velocity;
-                } else if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width - 1] == 1 &&
-                            mapArr[positionY / height][positionX / width - 1] == 1) {
-                        positionX -= velocity;
-                    } else {
-                        positionY = realPositionY;
-                        positionX -= velocity;
-                    }
-                } else if (positionX > (positionX / width) * width) {
-                    positionX = (positionX / width) * width;
-                }
+                moveLeft(mapArr);
             }
             if (events.contains(KeyCode.RIGHT)) {
-                if (positionX + velocity < realPositionX) {
-                    positionX += velocity;
-                } else if (positionX < realPositionX) {
-                    positionX = realPositionX;
-                } else if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
-                    if (mapArr[positionY / height + 1][positionX / width + 1] == 1 &&
-                            mapArr[positionY / height][positionX / width + 1] == 1) {
-                        positionX += velocity;
-                    } else {
-                        positionY = realPositionY;
-                        positionX += velocity;
-                    }
-                }
+                moveRight(mapArr);
             }
             realPositionX = ((positionX + width / 2) / width) * width;
             realPositionY = ((positionY + height / 2) / height) * height;
