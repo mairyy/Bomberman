@@ -21,10 +21,6 @@ enum STATUS {
     START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP, GAMEPLAY
 }
 
-enum LEVEL {
-    EASY, MEDIUM, HARD, NONE
-}
-
 enum MUSIC {
     ON, OFF
 }
@@ -36,6 +32,9 @@ enum SOUND {
 
 
 public class BombermanGame extends Application {
+    public enum LEVEL {
+        EASY, MEDIUM, HARD, NONE
+    }
     private GamePlay game = new GamePlay();
     private SoundGame soundGame = new SoundGame();
     public static final int SCREEN_WIDTH = 800;

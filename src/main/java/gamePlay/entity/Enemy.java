@@ -4,10 +4,13 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import main.java.BombermanGame;
 import main.java.gamePlay.GamePlay;
+import main.java.gamePlay.entity.BFS.BFS;
 import main.utils.ImageUtils;
 
 import java.util.List;
+import java.util.Random;
 
 public class Enemy extends MoveEntity {
     private int numberOfFrameAlive = 4;
@@ -63,45 +66,7 @@ public class Enemy extends MoveEntity {
    public void move(int[][] mapArr) {
        if(!isDestroy()) {
            setAnimationMove();
-           if (statusMove == 0) {
-               if (positionY > (positionY/height)*height) {
-                   positionY -= velocity;
-               } else if(mapArr[realPositionY/height-1][realPositionX/width] == 1){
-                   positionY -= velocity;
-               } else {
-                   statusMove = 1;
-               }
-           }
-           if (statusMove == 1) {
-               if (positionY  != realPositionY) {
-                   positionY += velocity;
-               } else if(mapArr[realPositionY/height+1][realPositionX/width] == 1) {
-                   positionY += velocity;
-               } else {
-                   statusMove = 0;
-               }
-
-           }
-           if (statusMove == 2) {
-               if (positionX > (positionX/width)*width) {
-                   positionX -= velocity;
-               } else if (mapArr[realPositionY/height][realPositionX/width-1] == 1) {
-                   positionX += velocity;
-               } else {
-                   statusMove = 3;
-               }
-           }
-           if (statusMove == 3) {
-               if (positionX != realPositionX) {
-                   positionX += velocity;
-               } else if (mapArr[realPositionY/height][realPositionX/width+1] == 1) {
-                   positionX -= velocity;
-               } else {
-                   statusMove = 2;
-               }
-           }
-           realPositionX = ((positionX + width/2)/width) * width;
-           realPositionY = ((positionY + height/2)/height) * height;
+           if (BombermanGame.level == BombermanGame.LEVEL.EASY) randomMove(mapArr);
        }
    }
 
@@ -124,5 +89,54 @@ public class Enemy extends MoveEntity {
         }
    }
 
+    public void randomMove(int[][] mapArr) {
+        Random generate = new Random();
+        int num = generate.nextInt(4);
+        if (statusMove == 0) {
+            if (positionY != realPositionY) {
+                positionY -= velocity;
+            } else if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
+                positionY -= velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        if (statusMove == 1) {
+            if (positionY != realPositionY) {
+                positionY += velocity;
+            } else if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
+                positionY += velocity;
+            } else {
+                statusMove = num;
+            }
 
+        }
+        if (statusMove == 2) {
+            if (positionX != realPositionX) {
+                positionX -= velocity;
+            } else if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
+                positionX -= velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        if (statusMove == 3) {
+            if (positionX != realPositionX) {
+                positionX += velocity;
+            } else if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
+                positionX += velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        realPositionX = ((positionX + width/2)/width) * width;
+        realPositionY = ((positionY + height/2)/height) * height;
+    }
+
+    //xE, yE: enemy's position in map[][]
+    //xP, yP: player's position in map[][]
+    public void AIMove(int[][] mapArr, int xE, int yE, int xP, int yP) {
+        BFS bfs = new BFS();
+        BFS.findPath(mapArr, bfs.visited, xE, yE, xP, yP);
+    }
 }
