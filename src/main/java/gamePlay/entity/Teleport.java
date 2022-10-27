@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import gamePlay.Map;
 import gamePlay.utils.ImageUtils;
+import gamePlay.GamePlay;
+import MenuGame.WinLayer;
 import gamePlay.entity.Entity;
 public class Teleport extends Entity {
     private Map map;
@@ -43,6 +45,7 @@ public class Teleport extends Entity {
         } else if(map.player.realPositionX == positionX && map.player.realPositionY == positionY
             && isDestroy){
             System.out.println("win");
+            GamePlay.isEnd = true;
         }
     }
 

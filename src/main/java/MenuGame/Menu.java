@@ -8,7 +8,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-
 import java.util.ArrayList;
 
 public class Menu {
@@ -21,6 +20,9 @@ public class Menu {
     public static Button backButton = new Button(buttonImage, 700, 100, 20, 90, true);
     public static Button musicButton = new Button(buttonImage, 500, 100, 310, 320, true);
     public static Button soundButton = new Button(buttonImage, 500, 100, 120, 245, true);
+    public static Button restartButton = new Button(buttonImage, 500, 100, 120, 168, true);
+    public static Button nextButton = new Button(buttonImage, 500, 100, 120, 90, true);
+    public static Button homeButton = new Button(buttonImage, 500, 100, 310, 10, true);
     public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
     public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
 
@@ -46,11 +48,23 @@ public class Menu {
         soundButton.circle = new Circle(480, 360, 45);
         soundButton.circle.setFill(new ImagePattern(soundButton.cropImage()));
 
+        restartButton.circle = new Circle(300, 700, 45);
+        restartButton.circle.setFill(new ImagePattern(restartButton.cropImage()));
+
+        nextButton.circle = new Circle(400, 700, 45);
+        nextButton.circle.setFill(new ImagePattern(nextButton.cropImage()));
+
+        homeButton.circle = new Circle(500, 700, 45);
+        homeButton.circle.setFill(new ImagePattern(homeButton.cropImage()));
+
         circleButtons.add(startButton);
         circleButtons.add(helpButton);
         circleButtons.add(highScoreButton);
         circleButtons.add(settingButton);
         circleButtons.add(backButton);
+        circleButtons.add(restartButton);
+        circleButtons.add(nextButton);
+        circleButtons.add(homeButton);
         circleButtons.add(musicButton);
         circleButtons.add(soundButton);
     }
@@ -76,10 +90,10 @@ public class Menu {
             circleButtons.get(index).circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // index < 5 là các nút ở màn hình chính và nút back
-                    if (index < 5) BombermanGame.status = STATUS.values()[index];
-                    // index = 5 là nút music, index = 6 là nút sound
-                    else if (index == 5) {
+                    // index < 8 là các nút ở màn hình chính và nút back
+                    if (index < 8) BombermanGame.status = STATUS.values()[index];
+                    // index = 8 là nút music, index = 9 là nút sound
+                    else if (index == 7) {
                         if (BombermanGame.music.equals(MUSIC.OFF)) {
                             circleButtons.get(index).image = buttonImage;
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));

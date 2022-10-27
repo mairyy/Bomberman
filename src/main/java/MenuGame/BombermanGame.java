@@ -11,8 +11,10 @@ import javafx.stage.Stage;
 import gamePlay.GamePlay;
 import gamePlay.SoundGame;
 
+import java.util.concurrent.TimeUnit;
+
 enum STATUS {
-    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, MAIN, STOP, GAMEPLAY
+    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, MAIN, HOME, STOP, GAMEPLAY
 }
 
 enum MUSIC {
@@ -64,6 +66,7 @@ public class BombermanGame extends Application {
         h.load();
         LevelLayer l = new LevelLayer();
         SettingsLayer s = new SettingsLayer();
+        WinLayer.load();
         game.start(theStage, theScene, gc);
 
         theStage.show();
@@ -114,6 +117,17 @@ public class BombermanGame extends Application {
                     startNanotime[0] = currentTime;
                     GamePlay.map.update(time, GamePlay.events);
                     GamePlay.map.render(gc);
+                    if (GamePlay.isEnd) {
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        clearScreen(gc);
+                        WinLayer.render(gc);
+                        GamePlay.isEnd = false;
+                        status = STATUS.STOP;
+                    }
                 }
                 if(music.equals(MUSIC.ON)) {
                     if(status == STATUS.GAMEPLAY) {
