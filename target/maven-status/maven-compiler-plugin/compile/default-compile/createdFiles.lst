@@ -28,6 +28,7 @@ gamePlay\SoundGame$1.class
 MenuGame\STATUS.class
 gamePlay\SoundGame.class
 gamePlay\entity\Item\Item.class
+gamePlay\entity\Item\MoveBrick.class
 main\parameterGame.class
 MenuGame\SettingsLayer.class
 MenuGame\LevelLayer$1.class

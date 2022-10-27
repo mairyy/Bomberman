@@ -14,7 +14,7 @@ public abstract class MoveEntity extends Entity {
     protected int realPositionX;
     protected int realPositionY;
     protected boolean endGame = false;
-    private boolean canMoveBrick = true;
+    private boolean canMoveBrick = false;
 
 
     public MoveEntity() {

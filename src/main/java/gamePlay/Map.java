@@ -1,5 +1,6 @@
 package gamePlay;
 
+import gamePlay.entity.Item.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import gamePlay.GamePlay;
@@ -14,10 +15,7 @@ import gamePlay.entity.Teleport;
 import gamePlay.entity.Bom;
 import gamePlay.entity.Brick;
 import gamePlay.entity.Wall;
-import gamePlay.entity.Item.PowerUpSpeed;
-import gamePlay.entity.Item.AddBom;
-import gamePlay.entity.Item.PowerUpBom;
-import gamePlay.entity.Item.Item;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,6 +99,11 @@ public class Map {
                             walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             teleport = new Teleport(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this);
+                            break;
+                        case 11:
+                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            arrMap[i][j] = 2;
+                            items.add(new MoveBrick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
                         default:
                             arrMap[i][j] = 1;
