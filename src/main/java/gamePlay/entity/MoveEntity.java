@@ -14,11 +14,20 @@ public abstract class MoveEntity extends Entity {
     protected int realPositionX;
     protected int realPositionY;
     protected boolean endGame = false;
+    private boolean canMoveBrick = true;
 
 
     public MoveEntity() {
         super();
         velocity = 2;
+    }
+
+    public void setCanMoveBrick(boolean canMoveBrick) {
+        this.canMoveBrick = canMoveBrick;
+    }
+
+    public boolean isCanMoveBrick() {
+        return canMoveBrick;
     }
 
     public boolean isEndGame() {
@@ -42,11 +51,11 @@ public abstract class MoveEntity extends Entity {
     }
 
     public void moveUp(int[][] mapArr) {
-        if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
+        if (proviso(mapArr[realPositionY / height - 1][realPositionX / width])) {
             if (positionX < realPositionX) {
                 //moveRight(mapArr);
                 if (positionX + velocity < realPositionX) {
-                   positionX += velocity;
+                    positionX += velocity;
                 } else {
                     positionX = realPositionX;
                 }
@@ -68,7 +77,7 @@ public abstract class MoveEntity extends Entity {
     }
 
     public void moveDown(int[][] mapArr) {
-        if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
+        if (proviso(mapArr[realPositionY / height + 1][realPositionX / width])) {
             if (positionX < realPositionX) {
                 //moveRight(mapArr);
                 if (positionX + velocity < realPositionX) {
@@ -94,7 +103,7 @@ public abstract class MoveEntity extends Entity {
     }
 
     public void moveLeft(int[][] mapArr) {
-        if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
+        if (proviso(mapArr[realPositionY / height][realPositionX / width - 1])) {
             if (positionY > realPositionY) {
                 //moveUp(mapArr);
                 if (positionY - velocity > realPositionY) {
@@ -120,7 +129,7 @@ public abstract class MoveEntity extends Entity {
     }
 
     public void moveRight(int[][] mapArr) {
-        if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
+        if (proviso(mapArr[realPositionY / height][realPositionX / width + 1])) {
             if (positionY > realPositionY) {
                 //moveUp(mapArr);
                 if (positionY - velocity > realPositionY) {
@@ -142,6 +151,22 @@ public abstract class MoveEntity extends Entity {
             positionX += velocity;
         } else {
             positionX = realPositionX;
+        }
+    }
+
+    public boolean proviso(int number) {
+        if (isCanMoveBrick()) {
+            if (number != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (number == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

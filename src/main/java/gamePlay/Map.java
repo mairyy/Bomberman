@@ -185,7 +185,7 @@ public class Map {
     public void handleInput(List<KeyCode> events) {
         player.setAnimations(events);
         if (events.contains(KeyCode.SPACE) &&
-                arrMap[player.getRealPositionY() / player.getHeight()][player.getRealPositionX() / player.getWidth()] != 6
+                arrMap[player.getRealPositionY() / player.getHeight()][player.getRealPositionX() / player.getWidth()] == 1
                  && player.getMaxTotalBom() > boms.size() &&
                 !player.isDestroy()) {
             Bom bom = new Bom(player.getRealPositionX(), player.getRealPositionY(), this);
