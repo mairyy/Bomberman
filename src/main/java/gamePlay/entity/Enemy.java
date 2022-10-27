@@ -74,6 +74,9 @@ public class Enemy extends MoveEntity {
        if(!isDestroy()) {
            setAnimationMove();
            if (BombermanGame.level == BombermanGame.LEVEL.EASY) {
+               randomMove(map.arrMap);
+           }
+           if (BombermanGame.level == BombermanGame.LEVEL.HARD) {
                AIMove(map.arrMap, realPositionY/width, realPositionX/height, map.player.realPositionY/width, map.player.realPositionX/height);
            }
        }
