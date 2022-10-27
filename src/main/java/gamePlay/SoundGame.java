@@ -51,7 +51,7 @@ public class SoundGame {
         musicMenu.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
-                soundPlayerMove.seek(Duration.ZERO);
+                musicMenu.seek(Duration.ZERO);
             }
         });
         musicMenu.play();
