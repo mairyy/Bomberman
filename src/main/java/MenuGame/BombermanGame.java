@@ -38,7 +38,7 @@ public class BombermanGame extends Application {
     public static Group root = new Group();
     public static STATUS status = STATUS.MAIN;
     public static LEVEL level = LEVEL.NONE;
-    public static MUSIC music = MUSIC.ON;
+    public static MUSIC music = MUSIC.OFF;
     public static SOUND sound = SOUND.ON;
 
     @Override
