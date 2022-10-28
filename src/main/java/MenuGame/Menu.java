@@ -90,7 +90,7 @@ public class Menu {
             circleButtons.get(index).circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // index < 8 là các nút ở màn hình chính và nút back
+                    // index < 8 là các nút trừ musi và sound
                     if (index < 8) BombermanGame.status = STATUS.values()[index];
                     // index = 8 là nút music, index = 9 là nút sound
                     else if (index == 7) {

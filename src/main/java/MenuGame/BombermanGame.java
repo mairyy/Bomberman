@@ -14,7 +14,7 @@ import gamePlay.SoundGame;
 import java.util.concurrent.TimeUnit;
 
 enum STATUS {
-    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, MAIN, HOME, STOP, GAMEPLAY
+    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, HOME, STOP, GAMEPLAY
 }
 
 enum MUSIC {
@@ -36,7 +36,7 @@ public class BombermanGame extends Application {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
     public static Group root = new Group();
-    public static STATUS status = STATUS.MAIN;
+    public static STATUS status = STATUS.HOME;
     public static LEVEL level = LEVEL.NONE;
     public static MUSIC music = MUSIC.OFF;
     public static SOUND sound = SOUND.ON;
@@ -67,6 +67,7 @@ public class BombermanGame extends Application {
         LevelLayer l = new LevelLayer();
         SettingsLayer s = new SettingsLayer();
         WinLayer.load();
+        GameOver.load();
         game.start(theStage, theScene, gc);
 
         theStage.show();
@@ -124,7 +125,11 @@ public class BombermanGame extends Application {
                             throw new RuntimeException(e);
                         }
                         clearScreen(gc);
-                        WinLayer.render(gc);
+                        if (!GamePlay.map.player.isDestroy()) {
+                            WinLayer.render(gc);
+                        } else {
+                            GameOver.render(gc);
+                        }
                         GamePlay.isEnd = false;
                         status = STATUS.STOP;
                     }

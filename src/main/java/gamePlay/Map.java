@@ -178,6 +178,8 @@ public class Map {
                 enemies.get(i).render(gc);
                 if (enemies.get(i).isColling(player)) {
                     player.setDestroy(true);
+                    GamePlay.isEnd = true;
+                    System.out.println(player.isDestroy());
                 }
             } else {
                 enemies.remove(i);
