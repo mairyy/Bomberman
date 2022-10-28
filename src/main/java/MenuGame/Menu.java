@@ -11,6 +11,12 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 public class Menu {
+    public static LevelLayer levelLayer = new LevelLayer();
+    public static SettingsLayer settingsLayer = new SettingsLayer();
+    public static HelpLayer helpLayer = new HelpLayer();
+    public static WinLayer winLayer = new WinLayer();
+    public static GameOver gameOver = new GameOver();
+    public static PauseLayer pauseLayer = new PauseLayer();
     public ArrayList<Button> circleButtons = new ArrayList<Button>();
     public static final Image buttonImage = new Image("Button/button.png");
     public static Button startButton = new Button(buttonImage, 20, 250, 210, 10, true);
@@ -23,8 +29,20 @@ public class Menu {
     public static Button restartButton = new Button(buttonImage, 500, 100, 120, 168, true);
     public static Button nextButton = new Button(buttonImage, 500, 100, 120, 90, true);
     public static Button homeButton = new Button(buttonImage, 500, 100, 310, 10, true);
+    public static Button pauseButton = new Button(new Image("Button/pauseButton.png"), 500, 100, 720, 8, true);
     public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
     public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
+
+    public Menu(GraphicsContext gc) {
+        loadButton();
+        createCircleButton();
+        renderButton(gc);
+        handleButton(gc);
+        helpLayer.load();
+        winLayer.load();
+        gameOver.load();
+        pauseLayer.load();
+    }
 
     public void createCircleButton() {
         startButton.circle = new Circle(520, 400, 45);
@@ -57,6 +75,9 @@ public class Menu {
         homeButton.circle = new Circle(500, 700, 45);
         homeButton.circle.setFill(new ImagePattern(homeButton.cropImage()));
 
+        pauseButton.circle = new Circle(770, 40, 20);
+        pauseButton.circle.setFill(new ImagePattern(pauseButton.cropImage()));
+
         circleButtons.add(startButton);
         circleButtons.add(helpButton);
         circleButtons.add(highScoreButton);
@@ -65,6 +86,7 @@ public class Menu {
         circleButtons.add(restartButton);
         circleButtons.add(nextButton);
         circleButtons.add(homeButton);
+        circleButtons.add(pauseButton);
         circleButtons.add(musicButton);
         circleButtons.add(soundButton);
     }
@@ -77,6 +99,8 @@ public class Menu {
     public void renderButton(GraphicsContext gc) {
         playerBgImage1.render(gc);
         textBg.render(gc);
+        startButton.circle.setCenterX(520);
+        startButton.circle.setCenterY(400);
         BombermanGame.root.getChildren().add(startButton.circle);
         BombermanGame.root.getChildren().add(helpButton.circle);
         BombermanGame.root.getChildren().add(settingButton.circle);
@@ -90,10 +114,10 @@ public class Menu {
             circleButtons.get(index).circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    // index < 8 là các nút trừ musi và sound
-                    if (index < 8) BombermanGame.status = STATUS.values()[index];
-                    // index = 8 là nút music, index = 9 là nút sound
-                    else if (index == 7) {
+                    // index < 9 là các nút trừ music và sound
+                    if (index < 9) BombermanGame.status = STATUS.values()[index];
+                    // index = 9 là nút music, index = 10 là nút sound
+                    else if (index == 9) {
                         if (BombermanGame.music.equals(MUSIC.OFF)) {
                             circleButtons.get(index).image = buttonImage;
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));

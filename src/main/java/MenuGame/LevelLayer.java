@@ -80,4 +80,10 @@ public class LevelLayer {
             });
         }
     }
+
+    public static void clear() {
+        BombermanGame.root.getChildren().remove(easyButton.rectangle);
+        BombermanGame.root.getChildren().remove(normalButton.rectangle);
+        BombermanGame.root.getChildren().remove(hardButton.rectangle);
+    }
 }

@@ -12,6 +12,10 @@ public class GameOver {
 
     public static void render(GraphicsContext gc) {
         gameOverImg.render(gc);
+        Menu.restartButton.circle.setCenterX(350);
+        Menu.restartButton.circle.setCenterY(650);
+        Menu.homeButton.circle.setCenterX(450);
+        Menu.homeButton.circle.setCenterY(650);
         BombermanGame.root.getChildren().add(Menu.restartButton.circle);
         BombermanGame.root.getChildren().add(Menu.homeButton.circle);
     }
