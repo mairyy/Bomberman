@@ -18,6 +18,10 @@ enum StatusMove {
     UP, DOWN, LEFT, RIGHT
 }
 public class Enemy extends MoveEntity {
+    private int numberOfType;
+    //0 normal
+    //1 AI
+    //2 move brick
     private int numberOfFrameAlive = 4;
     private int numberOfFrameDEAD = 5;
     private double frame = 0;
@@ -33,18 +37,18 @@ public class Enemy extends MoveEntity {
     }
     private Map map;
 
-    public Enemy(int positionX, int positionY, Map map) {
+    public Enemy(int positionX, int positionY, Map map, int numberOfType) {
         loadImage("resource/image/enemies.png");
         width = (int) (image.getWidth()/13);
         height = (int) 54;
         for (int i = 0; i < 2 ; i++) {
             for (int j = 0; j < numberOfFrameAlive; j++) {
-                Image newImage = ImageUtils.crop(image, (i*4 + j)*width, height*0, width, height);
+                Image newImage = ImageUtils.crop(image, (i*4 + j)*width, height*numberOfType, width, height);
                 animationMove[i][j] = newImage;
             }
         }
         for (int i = 0; i < numberOfFrameDEAD; i++) {
-            Image newImage = ImageUtils.crop(image, (i+numberOfFrameAlive*2)*width, 0, width, height);
+            Image newImage = ImageUtils.crop(image, (i+numberOfFrameAlive*2)*width, height*numberOfType, width, height);
             animationDead[i] = newImage;
         }
         width = GamePlay.widthUnit;
@@ -56,6 +60,10 @@ public class Enemy extends MoveEntity {
         directionNumber = (int) (Math.random() * 2);
         velocity = 1;
         this.map = map;
+        this.numberOfType = numberOfType;
+        if(numberOfType == 2) {
+            setCanMoveBrick(true);
+        }
     }
 
 
@@ -73,11 +81,14 @@ public class Enemy extends MoveEntity {
    public void move() {
        if(!isDestroy()) {
            setAnimationMove();
-           if (BombermanGame.level == BombermanGame.LEVEL.EASY) {
+           if (numberOfType == 0) {
                randomMove(map.arrMap);
            }
-           if (BombermanGame.level == BombermanGame.LEVEL.HARD) {
+           if (numberOfType == 1) {
                AIMove(map.arrMap, realPositionY/width, realPositionX/height, map.player.realPositionY/width, map.player.realPositionX/height);
+           }
+           if (numberOfType == 2) {
+               moveBrick(map.arrMap);
            }
        }
 
@@ -145,6 +156,51 @@ public class Enemy extends MoveEntity {
         realPositionX = ((positionX + width/2)/width) * width;
         realPositionY = ((positionY + height/2)/height) * height;
     }
+
+    public void moveBrick(int[][] mapArr) {
+        Random generate = new Random();
+        int num = generate.nextInt(4);
+        if (statusMove == 0) {
+            if (positionY != realPositionY) {
+                positionY -= velocity;
+            } else if (mapArr[realPositionY / height - 1][realPositionX / width] != 0) {
+                positionY -= velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        if (statusMove == 1) {
+            if (positionY != realPositionY) {
+                positionY += velocity;
+            } else if (mapArr[realPositionY / height + 1][realPositionX / width] != 0) {
+                positionY += velocity;
+            } else {
+                statusMove = num;
+            }
+
+        }
+        if (statusMove == 2) {
+            if (positionX != realPositionX) {
+                positionX -= velocity;
+            } else if (mapArr[realPositionY / height][realPositionX / width - 1] != 0) {
+                positionX -= velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        if (statusMove == 3) {
+            if (positionX != realPositionX) {
+                positionX += velocity;
+            } else if (mapArr[realPositionY / height][realPositionX / width + 1] != 0) {
+                positionX += velocity;
+            } else {
+                statusMove = num;
+            }
+        }
+        realPositionX = ((positionX + width/2)/width) * width;
+        realPositionY = ((positionY + height/2)/height) * height;
+    }
+
 
     //xE, yE: enemy's position in map[][]
     //xP, yP: player's position in map[][]

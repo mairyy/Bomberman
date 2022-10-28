@@ -77,7 +77,12 @@ public class Map {
                             arrMap[i][j] = 1;
                             break;
                         case 04:
-                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            // enemy normal
+                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 0));
+                            arrMap[i][j] = 1;
+                            break;
+                        case 05:
+                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 1));
                             arrMap[i][j] = 1;
                             break;
                         case 07:
@@ -104,6 +109,10 @@ public class Map {
                             walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new MoveBrick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            break;
+                        case 12:
+                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 2));
+                            arrMap[i][j] = 1;
                             break;
                         default:
                             arrMap[i][j] = 1;
