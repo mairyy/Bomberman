@@ -31,7 +31,6 @@ public class BombermanGame extends Application {
     public enum LEVEL {
         EASY, MEDIUM, HARD, NONE
     }
-    private Menu menu = new Menu();
     private GamePlay game = new GamePlay();
     private SoundGame soundGame = new SoundGame();
     public static final int SCREEN_WIDTH = 800;
@@ -58,7 +57,7 @@ public class BombermanGame extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         clearScreen(gc);
 
-        menu = createMenu(gc);
+        Menu menu = new Menu(gc);
         game.start(theStage, theScene, gc);
 
         theStage.show();
@@ -143,18 +142,6 @@ public class BombermanGame extends Application {
         Color color = Color.rgb(0, 255, 0);
         gc.setFill(color);
         gc.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    }
-
-    private static Menu createMenu(GraphicsContext gc) {
-        Menu menu = new Menu();
-        menu.loadButton();
-        menu.createCircleButton();
-        menu.renderButton(gc);
-        menu.handleButton(gc);
-        menu.helpLayer.load();
-        menu.winLayer.load();
-        menu.gameOver.load();
-        return menu;
     }
 
 }

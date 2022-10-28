@@ -31,6 +31,16 @@ public class Menu {
     public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
     public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
 
+    public Menu(GraphicsContext gc) {
+        loadButton();
+        createCircleButton();
+        renderButton(gc);
+        handleButton(gc);
+        helpLayer.load();
+        winLayer.load();
+        gameOver.load();
+    }
+
     public void createCircleButton() {
         startButton.circle = new Circle(520, 400, 45);
         startButton.circle.setFill(new ImagePattern(startButton.cropImage()));
