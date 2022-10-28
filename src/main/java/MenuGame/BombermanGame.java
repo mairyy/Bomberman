@@ -14,7 +14,7 @@ import gamePlay.SoundGame;
 import java.util.concurrent.TimeUnit;
 
 enum STATUS {
-    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, HOME, STOP, GAMEPLAY
+    START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, HOME, PAUSE, STOP, GAMEPLAY
 }
 
 enum MUSIC {
@@ -104,6 +104,9 @@ public class BombermanGame extends Application {
                     startNanotime[0] = currentTime;
                     GamePlay.map.update(time, GamePlay.events);
                     GamePlay.map.render(gc);
+                    if (!root.getChildren().contains(menu.pauseButton.circle)) {
+                        root.getChildren().add(menu.pauseButton.circle);
+                    }
                     if (GamePlay.isEnd) {
                         try {
                             TimeUnit.SECONDS.sleep(2);
@@ -112,13 +115,20 @@ public class BombermanGame extends Application {
                         }
                         clearScreen(gc);
                         if (!GamePlay.map.player.isDestroy()) {
+                            root.getChildren().remove(menu.pauseButton.circle);
                             menu.winLayer.render(gc);
                         } else {
+                            root.getChildren().remove(menu.pauseButton.circle);
                             menu.gameOver.render(gc);
                         }
                         GamePlay.isEnd = false;
                         status = STATUS.STOP;
                     }
+                }
+                if (status.equals(STATUS.PAUSE)) {
+                    root.getChildren().remove(menu.pauseButton.circle);
+                    menu.pauseLayer.render(gc);
+                    status = STATUS.STOP;
                 }
                 if(music.equals(MUSIC.ON)) {
                     if(status == STATUS.GAMEPLAY) {
