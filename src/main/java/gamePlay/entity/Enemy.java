@@ -72,7 +72,6 @@ public class Enemy extends MoveEntity {
         if(!isDestroy) {
             gc.drawImage(animationMove[status][(int)frame], getPositionX(), getPositionY(), width, height);
         } else {
-            setFrameDead();
             if(!endGame){
                 gc.drawImage(animationDead[(int)frame], positionX, positionY, width, height);
             }
@@ -80,7 +79,6 @@ public class Enemy extends MoveEntity {
     }
    public void move() {
        if(!isDestroy()) {
-           setAnimationMove();
            if (numberOfType == 0) {
                randomMove(map.arrMap);
            }
@@ -94,20 +92,20 @@ public class Enemy extends MoveEntity {
 
    }
 
-   public void setAnimationMove() {
+   public void setAnimationMove(double time) {
         if(velocity > 0) {
             status = 1;
         } else {
             status = 0;
         }
-        frame += 0.1;
+        frame += time * 10;
         if(frame >= numberOfFrameAlive) {
             frame = 0;
         }
    }
 
-   public void setFrameDead() {
-        frame += 0.1;
+   public void setFrameDead(double time) {
+        frame += time * 10;
         if(frame >= numberOfFrameDEAD) {
             endGame = true;
         }

@@ -48,10 +48,10 @@ public class Brick extends Entity {
     }
 
 
-    public void update(List<Integer> toRemove) {
+    public void update(List<Integer> toRemove, double time) {
         if(isDestroy) {
             if(!isEnd) {
-                frame += 0.15;
+                frame += time * 10;
                 if (frame >= numberFrame) {
                     isEnd = true;
                 }

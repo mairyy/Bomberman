@@ -127,6 +127,7 @@ public class Map {
 
     public void update(double time, List<KeyCode> events) {
         handleInput(events);
+        player.setAnimations(events, time);
         if (boms.size() != 0) {
             for (int i = 0; i < boms.size(); i++) {
                 boms.get(i).setFrame(time);
@@ -146,16 +147,23 @@ public class Map {
                 i--;
             }
         }
-        teleport.update();
+        teleport.update(time);
 
         List<Integer> toRemove = new ArrayList<>();
         for (Entity wall : walls.values()) {
             if (wall instanceof Brick) {
-                ((Brick) wall).update(toRemove);
+                ((Brick) wall).update(toRemove, time);
             }
         }
         for (int i : toRemove) {
             walls.remove(i);
+        }
+        for (Enemy enemy : enemies) {
+            if(!enemy.isDestroy()) {
+                enemy.setAnimationMove(time);
+            } else {
+                enemy.setFrameDead(time);
+            }
         }
     }
 
@@ -178,7 +186,6 @@ public class Map {
                 enemies.get(i).render(gc);
                 if (enemies.get(i).isColling(player)) {
                     player.setDestroy(true);
-                    GamePlay.isEnd = true;
                     System.out.println(player.isDestroy());
                 }
             } else {
@@ -194,10 +201,12 @@ public class Map {
         if (!player.isEndGame()) {
             player.render(gc);
         }
+        if(player.isEndGame()) {
+            GamePlay.isEnd = true;
+        }
     }
 
     public void handleInput(List<KeyCode> events) {
-        player.setAnimations(events);
         if (events.contains(KeyCode.SPACE) &&
                 arrMap[player.getRealPositionY() / player.getHeight()][player.getRealPositionX() / player.getWidth()] == 1
                  && player.getMaxTotalBom() > boms.size() &&
