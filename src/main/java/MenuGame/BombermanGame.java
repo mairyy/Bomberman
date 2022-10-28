@@ -31,6 +31,7 @@ public class BombermanGame extends Application {
     public enum LEVEL {
         EASY, MEDIUM, HARD, NONE
     }
+    private Menu menu = new Menu();
     private GamePlay game = new GamePlay();
     private SoundGame soundGame = new SoundGame();
     public static final int SCREEN_WIDTH = 800;
@@ -57,17 +58,7 @@ public class BombermanGame extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         clearScreen(gc);
 
-        Menu m = new Menu();
-        m.loadButton();
-        m.createCircleButton();
-        m.renderButton(gc);
-        m.handleButton(gc);
-        HelpLayer h = new HelpLayer();
-        h.load();
-        LevelLayer l = new LevelLayer();
-        SettingsLayer s = new SettingsLayer();
-        WinLayer.load();
-        GameOver.load();
+        menu = createMenu(gc);
         game.start(theStage, theScene, gc);
 
         theStage.show();
@@ -76,44 +67,40 @@ public class BombermanGame extends Application {
             public void handle(long currentTime) {
                 if (status.equals(STATUS.HELPMENU)) {
                     clearScreen(gc);
-                    h.render(gc);
+                    menu.helpLayer.render(gc);
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.BACK)) {
                     clearScreen(gc);
-                    root.getChildren().remove(Menu.backButton.circle);
-                    if(root.getChildren().contains(LevelLayer.easyButton.rectangle)) {
-                        root.getChildren().remove(LevelLayer.easyButton.rectangle);
-                        root.getChildren().remove(LevelLayer.normalButton.rectangle);
-                        root.getChildren().remove(LevelLayer.hardButton.rectangle);
+                    root.getChildren().remove(menu.backButton.circle);
+                    if(root.getChildren().contains(menu.levelLayer.easyButton.rectangle)) {
+                        menu.levelLayer.clear();
                     }
-                    if(root.getChildren().contains(Menu.musicButton.circle)) {
-                        root.getChildren().remove(Menu.musicButton.circle);
-                        root.getChildren().remove(Menu.soundButton.circle);
+                    if(root.getChildren().contains(menu.musicButton.circle)) {
+                        root.getChildren().remove(menu.musicButton.circle);
+                        root.getChildren().remove(menu.soundButton.circle);
                     }
-                    m.renderButton(gc);
+                    menu.renderButton(gc);
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.START)) {
                     clearScreen(gc);
-                    l.createLevelButton();
-                    l.renderLevelButton();
-                    l.handleLevelButton(gc);
+                    menu.levelLayer.createLevelButton();
+                    menu.levelLayer.renderLevelButton();
+                    menu.levelLayer.handleLevelButton(gc);
                     System.out.println(level);
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.SETTINGS)) {
                     clearScreen(gc);
-                    s.renderButton();
+                    menu.settingsLayer.renderButton();
                     status = STATUS.STOP;
                 }
                 if (status.equals(STATUS.GAMEPLAY)) {
                     clearScreen(gc);
-                    root.getChildren().remove(Menu.backButton.circle);
-                    root.getChildren().remove(LevelLayer.easyButton.rectangle);
-                    root.getChildren().remove(LevelLayer.normalButton.rectangle);
-                    root.getChildren().remove(LevelLayer.hardButton.rectangle);
-                    //game.start(theStage, theScene, gc);
+                    root.getChildren().remove(menu.backButton.circle);
+                    menu.levelLayer.clear();
+
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
                     GamePlay.map.update(time, GamePlay.events);
@@ -126,9 +113,9 @@ public class BombermanGame extends Application {
                         }
                         clearScreen(gc);
                         if (!GamePlay.map.player.isDestroy()) {
-                            WinLayer.render(gc);
+                            menu.winLayer.render(gc);
                         } else {
-                            GameOver.render(gc);
+                            menu.gameOver.render(gc);
                         }
                         GamePlay.isEnd = false;
                         status = STATUS.STOP;
@@ -152,9 +139,22 @@ public class BombermanGame extends Application {
         }
     }
 
-    public static void clearScreen(GraphicsContext gc) {
+    private static void clearScreen(GraphicsContext gc) {
         Color color = Color.rgb(0, 255, 0);
         gc.setFill(color);
         gc.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
+
+    private static Menu createMenu(GraphicsContext gc) {
+        Menu menu = new Menu();
+        menu.loadButton();
+        menu.createCircleButton();
+        menu.renderButton(gc);
+        menu.handleButton(gc);
+        menu.helpLayer.load();
+        menu.winLayer.load();
+        menu.gameOver.load();
+        return menu;
+    }
+
 }

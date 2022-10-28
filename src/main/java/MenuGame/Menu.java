@@ -11,6 +11,11 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 public class Menu {
+    public static LevelLayer levelLayer = new LevelLayer();
+    public static SettingsLayer settingsLayer = new SettingsLayer();
+    public static HelpLayer helpLayer = new HelpLayer();
+    public static WinLayer winLayer = new WinLayer();
+    public static GameOver gameOver = new GameOver();
     public ArrayList<Button> circleButtons = new ArrayList<Button>();
     public static final Image buttonImage = new Image("Button/button.png");
     public static Button startButton = new Button(buttonImage, 20, 250, 210, 10, true);
