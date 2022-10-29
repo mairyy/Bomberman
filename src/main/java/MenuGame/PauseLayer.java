@@ -23,4 +23,10 @@ public class PauseLayer {
         BombermanGame.root.getChildren().add(MenuControl.startButton.circle);
         BombermanGame.root.getChildren().add(MenuControl.homeButton.circle);
     }
+
+    public static void clear() {
+        BombermanGame.root.getChildren().remove(MenuControl.restartButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.homeButton.circle);
+    }
 }

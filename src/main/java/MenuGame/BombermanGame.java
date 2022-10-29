@@ -85,10 +85,14 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.START)) {
-                    clearScreen(gc);
-                    menu.levelLayer.renderLevelButton();
-                    System.out.println(level);
-                    status = STATUS.STOP;
+                    if (root.getChildren().contains(menu.restartButton.circle)) {
+                        status = STATUS.GAMEPLAY;
+                    } else {
+                        clearScreen(gc);
+                        menu.levelLayer.renderLevelButton();
+                        System.out.println(level);
+                        status = STATUS.STOP;
+                    }
                 }
 
                 if (status.equals(STATUS.SETTINGS)) {
@@ -101,6 +105,9 @@ public class BombermanGame extends Application {
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
                     menu.levelLayer.clear();
+                    if (root.getChildren().contains(menu.restartButton.circle)) {
+                        menu.pauseLayer.clear();
+                    }
 
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
@@ -140,11 +147,13 @@ public class BombermanGame extends Application {
                     if (root.getChildren().contains(menu.nextButton.circle)) {
                         root.getChildren().remove(menu.nextButton.circle);
                     }
-                    root.getChildren().remove(menu.restartButton.circle);
-                    root.getChildren().remove(menu.startButton.circle);
-                    root.getChildren().remove(menu.homeButton.circle);
+                    menu.pauseLayer.clear();
                     menu.homeLayer.render(gc);
                     status = STATUS.STOP;
+                }
+
+                if(status.equals(STATUS.RESTART)) {
+                    System.out.println("restart");
                 }
 
                 if(music.equals(MUSIC.ON)) {
