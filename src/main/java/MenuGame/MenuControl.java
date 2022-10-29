@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 public class MenuControl {
+    public static HomeLayer homeLayer = new HomeLayer();
     public static LevelLayer levelLayer = new LevelLayer();
     public static SettingsLayer settingsLayer = new SettingsLayer();
     public static HelpLayer helpLayer = new HelpLayer();
@@ -30,14 +31,13 @@ public class MenuControl {
     public static Button nextButton = new Button(buttonImage, 500, 100, 120, 90, true);
     public static Button homeButton = new Button(buttonImage, 500, 100, 310, 10, true);
     public static Button pauseButton = new Button(new Image("Button/pauseButton.png"), 500, 100, 720, 8, true);
-    public static Sprite playerBgImage1 = new Sprite(new Image("startLayer.png"), 0, 0, 10, 315, 400, 500);
-    public static Sprite textBg = new Sprite(new Image("startLayer.png"), 0, -10, 50, 0, 687, 330);
 
     public MenuControl(GraphicsContext gc) {
-        loadButton();
+        homeLayer.load();
         createCircleButton();
-        renderButton(gc);
         handleButton(gc);
+        levelLayer.createLevelButton();
+        levelLayer.handleLevelButton(gc);
         helpLayer.load();
         winLayer.load();
         gameOver.load();
@@ -89,22 +89,6 @@ public class MenuControl {
         circleButtons.add(pauseButton);
         circleButtons.add(musicButton);
         circleButtons.add(soundButton);
-    }
-
-    public void loadButton() {
-        playerBgImage1.load();
-        textBg.load();
-    }
-
-    public void renderButton(GraphicsContext gc) {
-        playerBgImage1.render(gc);
-        textBg.render(gc);
-        startButton.circle.setCenterX(520);
-        startButton.circle.setCenterY(400);
-        BombermanGame.root.getChildren().add(startButton.circle);
-        BombermanGame.root.getChildren().add(helpButton.circle);
-        BombermanGame.root.getChildren().add(settingButton.circle);
-        BombermanGame.root.getChildren().add(highScoreButton.circle);
     }
 
     public void handleButton(GraphicsContext gc) {

@@ -80,15 +80,13 @@ public class BombermanGame extends Application {
                         root.getChildren().remove(menu.musicButton.circle);
                         root.getChildren().remove(menu.soundButton.circle);
                     }
-                    menu.renderButton(gc);
+                    menu.homeLayer.render(gc);
                     status = STATUS.STOP;
                 }
 
                 if (status.equals(STATUS.START)) {
                     clearScreen(gc);
-                    menu.levelLayer.createLevelButton();
                     menu.levelLayer.renderLevelButton();
-                    menu.levelLayer.handleLevelButton(gc);
                     System.out.println(level);
                     status = STATUS.STOP;
                 }
@@ -138,7 +136,15 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.HOME)) {
-
+                    clearScreen(gc);
+                    if (root.getChildren().contains(menu.nextButton.circle)) {
+                        root.getChildren().remove(menu.nextButton.circle);
+                    }
+                    root.getChildren().remove(menu.restartButton.circle);
+                    root.getChildren().remove(menu.startButton.circle);
+                    root.getChildren().remove(menu.homeButton.circle);
+                    menu.homeLayer.render(gc);
+                    status = STATUS.STOP;
                 }
 
                 if(music.equals(MUSIC.ON)) {
