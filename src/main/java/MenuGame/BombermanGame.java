@@ -57,7 +57,7 @@ public class BombermanGame extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         clearScreen(gc);
 
-        Menu menu = new Menu(gc);
+        MenuControl menu = new MenuControl(gc);
         game.start(theStage, theScene, gc);
 
         theStage.show();
@@ -69,6 +69,7 @@ public class BombermanGame extends Application {
                     menu.helpLayer.render(gc);
                     status = STATUS.STOP;
                 }
+
                 if (status.equals(STATUS.BACK)) {
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
@@ -82,6 +83,7 @@ public class BombermanGame extends Application {
                     menu.renderButton(gc);
                     status = STATUS.STOP;
                 }
+
                 if (status.equals(STATUS.START)) {
                     clearScreen(gc);
                     menu.levelLayer.createLevelButton();
@@ -90,11 +92,13 @@ public class BombermanGame extends Application {
                     System.out.println(level);
                     status = STATUS.STOP;
                 }
+
                 if (status.equals(STATUS.SETTINGS)) {
                     clearScreen(gc);
                     menu.settingsLayer.renderButton();
                     status = STATUS.STOP;
                 }
+
                 if (status.equals(STATUS.GAMEPLAY)) {
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
@@ -125,11 +129,17 @@ public class BombermanGame extends Application {
                         status = STATUS.STOP;
                     }
                 }
+
                 if (status.equals(STATUS.PAUSE)) {
                     root.getChildren().remove(menu.pauseButton.circle);
                     menu.pauseLayer.render(gc);
                     status = STATUS.STOP;
                 }
+
+                if (status.equals(STATUS.HOME)) {
+
+                }
+
                 if(music.equals(MUSIC.ON)) {
                     if(status == STATUS.GAMEPLAY) {
                         soundGame.playSound(GamePlay.map, GamePlay.events);

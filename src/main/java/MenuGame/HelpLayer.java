@@ -11,11 +11,11 @@ public class HelpLayer {
     }
 
     public void render(GraphicsContext gc) {
-        BombermanGame.root.getChildren().remove(Menu.helpButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.settingButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.highScoreButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.startButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.helpButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.settingButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.highScoreButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
         helpLayerImage.render(gc);
-        BombermanGame.root.getChildren().add(Menu.backButton.circle);
+        BombermanGame.root.getChildren().add(MenuControl.backButton.circle);
     }
 }

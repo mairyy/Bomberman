@@ -13,14 +13,14 @@ public class PauseLayer {
 
     public static void render(GraphicsContext gc) {
         pauseImg.render(gc);
-        Menu.restartButton.circle.setCenterX(300);
-        Menu.restartButton.circle.setCenterY(450);
-        Menu.startButton.circle.setCenterX(400);
-        Menu.startButton.circle.setCenterY(450);
-        Menu.homeButton.circle.setCenterX(510);
-        Menu.homeButton.circle.setCenterY(450);
-        BombermanGame.root.getChildren().add(Menu.restartButton.circle);
-        BombermanGame.root.getChildren().add(Menu.startButton.circle);
-        BombermanGame.root.getChildren().add(Menu.homeButton.circle);
+        MenuControl.restartButton.circle.setCenterX(300);
+        MenuControl.restartButton.circle.setCenterY(450);
+        MenuControl.startButton.circle.setCenterX(400);
+        MenuControl.startButton.circle.setCenterY(450);
+        MenuControl.homeButton.circle.setCenterX(510);
+        MenuControl.homeButton.circle.setCenterY(450);
+        BombermanGame.root.getChildren().add(MenuControl.restartButton.circle);
+        BombermanGame.root.getChildren().add(MenuControl.startButton.circle);
+        BombermanGame.root.getChildren().add(MenuControl.homeButton.circle);
     }
 }

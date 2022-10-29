@@ -33,14 +33,14 @@ public class LevelLayer {
     }
 
     public void renderLevelButton() {
-        BombermanGame.root.getChildren().remove(Menu.helpButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.settingButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.highScoreButton.circle);
-        BombermanGame.root.getChildren().remove(Menu.startButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.helpButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.settingButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.highScoreButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
         BombermanGame.root.getChildren().add(easyButton.rectangle);
         BombermanGame.root.getChildren().add(normalButton.rectangle);
         BombermanGame.root.getChildren().add(hardButton.rectangle);
-        BombermanGame.root.getChildren().add(Menu.backButton.circle);
+        BombermanGame.root.getChildren().add(MenuControl.backButton.circle);
     }
 
     public void handleLevelButton(GraphicsContext gc) {
