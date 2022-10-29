@@ -33,9 +33,9 @@ public class Teleport extends Entity {
         this.positionY = positionY;
     }
 
-    public void update() {
+    public void update(double time) {
         //setFame;
-        frame += 0.15;
+        frame += time * 10;
         if(frame >= totalFrame) {
             frame = 0;
         }
@@ -44,7 +44,7 @@ public class Teleport extends Entity {
             frame = 0;
         } else if(map.player.realPositionX == positionX && map.player.realPositionY == positionY
             && isDestroy){
-            System.out.println("win");
+            //System.out.println("win");
             GamePlay.isEnd = true;
         }
     }

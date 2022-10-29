@@ -75,20 +75,20 @@ public class Player extends MoveEntity {
 
     }
 
-    public void setAnimations(List<KeyCode> events) {
+    public void setAnimations(List<KeyCode> events, double time) {
         if (!events.isEmpty()) {
             if (events.contains(KeyCode.UP)) {
                 status = 1;
-                frame += 0.15;
+                frame += time * 10;
             } else if (events.contains(KeyCode.DOWN)) {
                 status = 0;
-                frame += 0.15;
+                frame += time * 10;
             } else if (events.contains((KeyCode.LEFT))) {
                 status = 2;
-                frame += 0.15;
+                frame += time * 10;
             } else if (events.contains((KeyCode.RIGHT))) {
                 status = 3;
-                frame += 0.15;
+                frame += time * 10;
             }
             if (frame >= numberFrame) {
                 frame = 0;

@@ -3,6 +3,7 @@ gamePlay\entity\BFS\Point.class
 MenuGame\BombermanGame$1.class
 gamePlay\SoundGame$2.class
 main\handleInput.class
+MenuGame\PauseLayer.class
 MenuGame\SOUND.class
 gamePlay\GamePlay$1.class
 MenuGame\LevelLayer$2.class
