@@ -45,7 +45,7 @@ public class Teleport extends Entity {
         } else if(map.player.realPositionX == positionX && map.player.realPositionY == positionY
             && isDestroy){
             //System.out.println("win");
-            GamePlay.isEnd = true;
+            map.gamePlay.isEnd = true;
         }
     }
 

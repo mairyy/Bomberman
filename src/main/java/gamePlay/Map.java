@@ -50,6 +50,11 @@ public class Map {
     public void setPowerBom(int powerBom) {
         this.powerBom = powerBom;
     }
+    public GamePlay gamePlay;
+
+    public Map(GamePlay gamePlay) {
+        this.gamePlay = gamePlay;
+    }
 
     public void loadMap(File file) {
         try (BufferedReader inputStream = new BufferedReader(new FileReader(file))) {
@@ -127,11 +132,11 @@ public class Map {
 
     public void update(double time, List<KeyCode> events) {
         handleInput(events);
-        if(GamePlay.timeGame <= 0) {
+        if(gamePlay.timeGame <= 0) {
             player.setDestroy(true);
             player.setEndGame(true);
         }
-        GamePlay.timeGame -= time;
+        gamePlay.timeGame -= time;
         player.setAnimations(events, time);
         if (boms.size() != 0) {
             for (int i = 0; i < boms.size(); i++) {
@@ -212,7 +217,7 @@ public class Map {
             player.render(gc);
         }
         if(player.isEndGame()) {
-            GamePlay.isEnd = true;
+            gamePlay.isEnd = true;
         }
     }
 

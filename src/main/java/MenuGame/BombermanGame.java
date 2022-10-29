@@ -111,12 +111,12 @@ public class BombermanGame extends Application {
 
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
-                    GamePlay.map.update(time, GamePlay.events);
-                    GamePlay.map.render(gc);
+                    game.map.update(time, game.events);
+                    game.map.render(gc);
                     if (!root.getChildren().contains(menu.pauseButton.circle)) {
                         root.getChildren().add(menu.pauseButton.circle);
                     }
-                    if (GamePlay.isEnd) {
+                    if (game.isEnd) {
                         try {
                             TimeUnit.SECONDS.sleep(2);
                         } catch (InterruptedException e) {
@@ -124,14 +124,14 @@ public class BombermanGame extends Application {
                         }
                         System.out.println(game.score + " " + game.timeGame);
                         clearScreen(gc);
-                        if (!GamePlay.map.player.isDestroy()) {
+                        if (!game.map.player.isDestroy()) {
                             root.getChildren().remove(menu.pauseButton.circle);
                             menu.winLayer.render(gc);
                         } else {
                             root.getChildren().remove(menu.pauseButton.circle);
                             menu.gameOver.render(gc);
                         }
-                        GamePlay.isEnd = false;
+                        game.isEnd = false;
                         status = STATUS.STOP;
                     }
                 }
@@ -153,12 +153,15 @@ public class BombermanGame extends Application {
                 }
 
                 if(status.equals(STATUS.RESTART)) {
+                    game = new GamePlay();
+                    game.start(theStage, theScene, gc);
+                    status = STATUS.GAMEPLAY;
                     System.out.println("restart");
                 }
 
                 if(music.equals(MUSIC.ON)) {
                     if(status == STATUS.GAMEPLAY) {
-                        soundGame.playSound(GamePlay.map, GamePlay.events);
+                        soundGame.playSound(game.map, game.events);
                     }
                     else {
                         soundGame.playSoundMenu();

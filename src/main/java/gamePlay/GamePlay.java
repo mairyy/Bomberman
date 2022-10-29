@@ -24,11 +24,11 @@ import java.util.List;
 
 public class GamePlay {
     public final static int widthUnit = 50;
-    public static double timeGame = 200;
-    public static int score = 0;
-    public static Map map = new Map();
-    public static boolean isEnd = false;
-    public static List<KeyCode> events = new ArrayList<>();
+    public double timeGame = 200;
+    public int score = 0;
+    public Map map = new Map(this);
+    public boolean isEnd = false;
+    public List<KeyCode> events = new ArrayList<>();
 
     public void start(Stage stage, Scene scene, GraphicsContext gc)  {
         File file = new File("res/resource/map/map1.txt");
