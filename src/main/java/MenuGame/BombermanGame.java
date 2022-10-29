@@ -58,7 +58,6 @@ public class BombermanGame extends Application {
         clearScreen(gc);
 
         MenuControl menu = new MenuControl(gc);
-        game.start(theStage, theScene, gc);
 
         theStage.show();
         final Long[] startNanotime = {System.nanoTime()};
@@ -144,6 +143,8 @@ public class BombermanGame extends Application {
 
                 if (status.equals(STATUS.HOME)) {
                     clearScreen(gc);
+                    game = new GamePlay();
+                    game.start(theStage, theScene, gc);
                     if (root.getChildren().contains(menu.nextButton.circle)) {
                         root.getChildren().remove(menu.nextButton.circle);
                     }
