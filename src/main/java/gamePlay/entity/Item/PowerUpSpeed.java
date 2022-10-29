@@ -21,7 +21,7 @@ public class PowerUpSpeed extends Item {
 
     @Override
     public void update() {
-        if(map.player.getRealPositionY() == positionY && map.player.getRealPositionX() == positionX) {
+        if(checkColling()) {
             map.player.setVelocity(map.player.getVelocity()*2);
             isDestroy = true;
         }

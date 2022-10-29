@@ -24,7 +24,7 @@ public class PowerUpBom extends Item {
 
     @Override
     public void update() {
-        if(map.player.getRealPositionY() == positionY && map.player.getRealPositionX() == positionX) {
+        if(checkColling()) {
             map.setPowerBom(map.getPowerBom() + 1);
             isDestroy = true;
         }
