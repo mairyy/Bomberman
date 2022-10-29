@@ -117,6 +117,7 @@ public class BombermanGame extends Application {
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
+                        System.out.println(game.score + " " + game.timeGame);
                         clearScreen(gc);
                         if (!GamePlay.map.player.isDestroy()) {
                             root.getChildren().remove(menu.pauseButton.circle);

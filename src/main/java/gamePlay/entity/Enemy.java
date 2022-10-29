@@ -37,6 +37,12 @@ public class Enemy extends MoveEntity {
     }
     private Map map;
 
+    @Override
+    public void setDestroy(boolean destroy) {
+        super.setDestroy(destroy);
+        frame = 0;
+    }
+
     public Enemy(int positionX, int positionY, Map map, int numberOfType) {
         loadImage("resource/image/enemies.png");
         width = (int) (image.getWidth()/13);

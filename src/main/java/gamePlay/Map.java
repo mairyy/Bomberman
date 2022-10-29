@@ -127,6 +127,11 @@ public class Map {
 
     public void update(double time, List<KeyCode> events) {
         handleInput(events);
+        if(GamePlay.timeGame <= 0) {
+            player.setDestroy(true);
+            player.setEndGame(true);
+        }
+        GamePlay.timeGame -= time;
         player.setAnimations(events, time);
         if (boms.size() != 0) {
             for (int i = 0; i < boms.size(); i++) {
@@ -165,6 +170,18 @@ public class Map {
                 enemy.setFrameDead(time);
             }
         }
+        for (int i = 0; i < enemies.size(); i++) {
+            if(!enemies.get(i).isEndGame()) {
+                enemies.get(i).move();
+                if (enemies.get(i).isColling(player)) {
+                    player.setDestroy(true);
+                    System.out.println(player.isDestroy());
+                }
+            } else {
+                enemies.remove(i);
+                i--;
+            }
+        }
     }
 
     public void render(GraphicsContext gc) {
@@ -180,24 +197,17 @@ public class Map {
         for (Entity wall : walls.values()) {
             wall.render(gc);
         }
-        for (int i = 0; i < enemies.size(); i++) {
-            if(!enemies.get(i).isEndGame()) {
-                enemies.get(i).move();
-                enemies.get(i).render(gc);
-                if (enemies.get(i).isColling(player)) {
-                    player.setDestroy(true);
-                    System.out.println(player.isDestroy());
-                }
-            } else {
-                enemies.remove(i);
-                i--;
-            }
-        }
+
         if (boms.size() != 0) {
             for (Bom bom : boms) {
                 bom.render(gc);
             }
         }
+
+        for(Entity enemy : enemies) {
+            enemy.render(gc);
+        }
+
         if (!player.isEndGame()) {
             player.render(gc);
         }

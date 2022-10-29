@@ -12,15 +12,15 @@ import gamePlay.entity.Entity;
 import java.util.List;
 
 public class Player extends MoveEntity {
-    private int numberStatus = 4; // left, right, up, down.
-    private int numberFrame = 11;
-    private int numberFrameDead = 7;
+    private final int numberStatus = 4; // left, right, up, down.
+    private final int numberFrame = 11;
+    private final int numberFrameDead = 7;
     private int maxTotalBom = 1;
     private double frameDead = 0;
     double frame = 0;
     int status = 0;
-    private Image[][] animations = new Image[numberStatus][numberFrame];
-    private Image[] animationsDead = new Image[numberFrameDead];
+    private final Image[][] animations = new Image[numberStatus][numberFrame];
+    private final Image[] animationsDead = new Image[numberFrameDead];
 
     public int getMaxTotalBom() {
         return maxTotalBom;

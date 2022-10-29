@@ -22,6 +22,10 @@ public abstract class MoveEntity extends Entity {
         velocity = 2;
     }
 
+    public void setEndGame(boolean endGame) {
+        this.endGame = endGame;
+    }
+
     public void setCanMoveBrick(boolean canMoveBrick) {
         this.canMoveBrick = canMoveBrick;
     }

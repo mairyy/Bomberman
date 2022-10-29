@@ -13,17 +13,14 @@ gamePlay\entity\StatusMove.class
 gamePlay\entity\Background.class
 MenuGame\HelpLayer.class
 gamePlay\entity\Item\PowerUpSpeed.class
-MenuGame\Menu$3.class
 gamePlay\entity\Brick.class
 gamePlay\entity\Item\PowerUpBom.class
 MenuGame\BombermanGame.class
 MenuGame\MUSIC.class
-MenuGame\Menu$1.class
 gamePlay\entity\MoveEntity.class
 gamePlay\Map.class
 gamePlay\entity\Enemy.class
 gamePlay\entity\Teleport.class
-MenuGame\Menu$2.class
 gamePlay\GamePlay.class
 gamePlay\SoundGame$1.class
 MenuGame\STATUS.class
@@ -34,7 +31,6 @@ main\parameterGame.class
 MenuGame\SettingsLayer.class
 MenuGame\LevelLayer$1.class
 Main.class
-MenuGame\Menu.class
 gamePlay\entity\BFS\BFS.class
 gamePlay\utils\ImageUtils.class
 MenuGame\Sprite.class
