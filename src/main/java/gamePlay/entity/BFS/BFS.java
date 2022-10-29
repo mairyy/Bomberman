@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Queue;
 
 public class BFS {
-    static int mapRow = 15;
-    static int mapCol = 15;
+    static int mapRow = 16;
+    static int mapCol = 16;
     public boolean visited[][] = new boolean[mapRow][mapCol];
 
     // Direction vectors
