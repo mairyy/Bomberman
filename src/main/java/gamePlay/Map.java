@@ -24,7 +24,7 @@ import java.util.List;
 public class Map {
     private int lenWidth;
     private int lenHeight;
-    private Background background = new Background();
+    private final Background background = new Background();
     public HashMap<Integer, Entity> walls = new HashMap<>();
     public List<Enemy> enemies = new ArrayList<>();
     public List<Bom> boms = new ArrayList<>();
@@ -192,9 +192,10 @@ public class Map {
     public void render(GraphicsContext gc) {
 //        gc.clearRect(0,0, 800, 800);
 //        background.render(gc, GamePlay.widthScreen, GamePlay.heightScreen);
-        Color color = Color.rgb(0, 255, 0);
+       /* Color color = Color.rgb(0, 255, 0);
         gc.setFill(color);
-        gc.fillRect(0, 0, 800, 800);
+        gc.fillRect(0, 0, 800, 800);*/
+        background.render(gc);
         teleport.render(gc);
         for (Item item : items) {
             item.render(gc);
