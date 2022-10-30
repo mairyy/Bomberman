@@ -23,18 +23,18 @@ public class SoundGame {
         musicMenu = new MediaPlayer(newSound);
         newSound = new Media(new File("res/resource/music/Sounds/Menu/soundClick.wav").toURI().toString());
         soundClick = new MediaPlayer(newSound);
+        soundPlayerMove.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                soundPlayerMove.seek(Duration.ZERO);
+            }
+        });
     }
 
     public void playSoundMove(List<KeyCode> events) {
         if (events.contains(KeyCode.UP) || events.contains(KeyCode.DOWN)
         || events.contains(KeyCode.LEFT) || events.contains(KeyCode.RIGHT)) {
             soundPlayerMove.setMute(false);
-            soundPlayerMove.setOnEndOfMedia(new Runnable() {
-                @Override
-                public void run() {
-                    soundPlayerMove.seek(Duration.ZERO);
-                }
-            });
             soundPlayerMove.play();
         } else {
             soundPlayerMove.setMute(true);
@@ -71,6 +71,7 @@ public class SoundGame {
     }
 
     public void close() {
-
+        soundPlayerDead.stop();
+        soundPlayerMove.stop();
     }
 }

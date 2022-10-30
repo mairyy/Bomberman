@@ -136,11 +136,11 @@ public class Map {
 
     public void update(double time, List<KeyCode> events) {
         handleInput(events);
-        if(gamePlay.timeGame <= 0) {
+        gamePlay.timeGame += time;
+        if(gamePlay.timeGame > gamePlay.maxTimeGame) {
             player.setDestroy(true);
             player.setEndGame(true);
         }
-        gamePlay.timeGame -= time;
         player.setAnimations(events, time);
         if (boms.size() != 0) {
             for (int i = 0; i < boms.size(); i++) {
@@ -187,7 +187,13 @@ public class Map {
                 }
             } else {
                 enemies.remove(i);
-                gamePlay.score += 50;
+                if(gamePlay.timeGame < 50) {
+                    gamePlay.score += 150;
+                } else if(gamePlay.timeGame < 100) {
+                    gamePlay.score += 100;
+                } else {
+                    gamePlay.score += 50;
+                }
                 i--;
             }
         }

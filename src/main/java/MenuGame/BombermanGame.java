@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import gamePlay.GamePlay;
 import gamePlay.SoundGame;
 
+import java.io.*;
 import java.util.concurrent.TimeUnit;
 
 enum STATUS {
@@ -40,10 +41,18 @@ public class BombermanGame extends Application {
     public static LEVEL level = LEVEL.NONE;
     public static MUSIC music = MUSIC.OFF;
     public static SOUND sound = SOUND.ON;
+    public static double timeEasy;
+    public static double timeMedium;
+    public static double timeHard;
+    public static int scoreEasy;
+    public static int scoreMedium;
+    public static int scoreHard;
+
 
     @Override
     public void start(Stage theStage) {
         menu(theStage);
+        readRecord();
     }
     public void menu(Stage theStage) {
         theStage.setTitle("Bomberman");
@@ -127,6 +136,7 @@ public class BombermanGame extends Application {
                         clearScreen(gc);
                         if (!game.map.player.isDestroy()) {
                             root.getChildren().remove(menu.pauseButton.circle);
+                            handleRecord();
                             menu.winLayer.render(gc);
                         } else {
                             root.getChildren().remove(menu.pauseButton.circle);
@@ -198,4 +208,51 @@ public class BombermanGame extends Application {
         gc.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
+    public void readRecord() {
+        File file = new File("res/resource/map/record.txt");
+        try (BufferedReader inputStream = new BufferedReader(new FileReader(file))){
+            String line = inputStream.readLine();
+            String[] arr = line.split(" ");
+            scoreEasy = Integer.parseInt(arr[0]);
+            timeEasy = Double.parseDouble(arr[1]);
+            scoreEasy = Integer.parseInt(arr[2]);
+            timeEasy = Double.parseDouble(arr[3]);
+            scoreEasy = Integer.parseInt(arr[4]);
+            timeEasy = Double.parseDouble(arr[5]);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleRecord() {
+        switch (level) {
+            case EASY:
+                if(scoreEasy < game.score || (scoreEasy == game.score && timeEasy > game.timeGame)) {
+                    scoreEasy = game.score;
+                    timeEasy = game.timeGame;
+                }
+                break;
+            case MEDIUM:
+                if(scoreMedium < game.score || (scoreMedium == game.score && timeMedium > game.timeGame)) {
+                    scoreMedium = game.score;
+                    timeMedium = game.timeGame;
+                }
+                break;
+            case HARD:
+                if(scoreHard < game.score || (scoreHard == game.score && timeHard > game.timeGame)) {
+                    scoreHard = game.score;
+                    timeHard = game.timeGame;
+                }
+                break;
+        }
+        try {
+            FileWriter fw = new FileWriter("res/resource/map/record.txt");
+            String s = scoreEasy + " " + timeEasy + " " + scoreMedium + " " + timeMedium
+                    + " " + scoreHard + " " + timeHard;
+            fw.write(s);
+            fw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

@@ -23,7 +23,6 @@ gamePlay\entity\Enemy.class
 gamePlay\entity\Teleport.class
 gamePlay\GamePlay.class
 gamePlay\SoundGame$1.class
-MenuGame\STATUS.class
 gamePlay\SoundGame.class
 gamePlay\entity\Item\Item.class
 gamePlay\entity\Item\MoveBrick.class
@@ -37,5 +36,6 @@ MenuGame\BombermanGame$LEVEL.class
 gamePlay\entity\Wall.class
 gamePlay\entity\Player.class
 MenuGame\LevelLayer.class
+MenuGame\BombermanGame$2.class
 gamePlay\entity\Bom.class
 gamePlay\entity\Entity.class

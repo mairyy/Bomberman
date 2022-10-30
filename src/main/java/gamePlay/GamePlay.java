@@ -24,7 +24,8 @@ import java.util.List;
 
 public class GamePlay {
     public final static int widthUnit = 50;
-    public double timeGame = 200;
+    public double timeGame = 0;
+    public double maxTimeGame = 200;
     public int score = 0;
     public Map map = new Map(this);
     public boolean isEnd = false;
