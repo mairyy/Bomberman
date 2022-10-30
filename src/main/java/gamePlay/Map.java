@@ -184,17 +184,13 @@ public class Map {
                 }
             } else {
                 enemies.remove(i);
+                gamePlay.score += 50;
                 i--;
             }
         }
     }
 
     public void render(GraphicsContext gc) {
-//        gc.clearRect(0,0, 800, 800);
-//        background.render(gc, GamePlay.widthScreen, GamePlay.heightScreen);
-       /* Color color = Color.rgb(0, 255, 0);
-        gc.setFill(color);
-        gc.fillRect(0, 0, 800, 800);*/
         background.render(gc);
         teleport.render(gc);
         for (Item item : items) {

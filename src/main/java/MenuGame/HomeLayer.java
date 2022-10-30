@@ -24,4 +24,11 @@ public class HomeLayer {
         BombermanGame.root.getChildren().add(MenuControl.settingButton.circle);
         BombermanGame.root.getChildren().add(MenuControl.highScoreButton.circle);
     }
+
+    public void clear() {
+        BombermanGame.root.getChildren().remove(MenuControl.helpButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.settingButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.highScoreButton.circle);
+        BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
+    }
 }

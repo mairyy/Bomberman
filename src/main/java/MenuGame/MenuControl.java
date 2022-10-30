@@ -1,5 +1,6 @@
 package MenuGame;
 
+import MenuGame.HighScore.HighScoreLayer;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.ColorAdjust;
@@ -14,6 +15,7 @@ public class MenuControl {
     public static HomeLayer homeLayer = new HomeLayer();
     public static LevelLayer levelLayer = new LevelLayer();
     public static SettingsLayer settingsLayer = new SettingsLayer();
+    public static HighScoreLayer highScoreLayer = new HighScoreLayer();
     public static HelpLayer helpLayer = new HelpLayer();
     public static WinLayer winLayer = new WinLayer();
     public static GameOver gameOver = new GameOver();
@@ -42,6 +44,7 @@ public class MenuControl {
         winLayer.load();
         gameOver.load();
         pauseLayer.load();
+        highScoreLayer.load();
     }
 
     public void createCircleButton() {

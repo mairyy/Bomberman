@@ -106,6 +106,9 @@ public class BombermanGame extends Application {
                     menu.levelLayer.clear();
                     if (root.getChildren().contains(menu.restartButton.circle)) {
                         menu.pauseLayer.clear();
+                        if (root.getChildren().contains(menu.nextButton.circle)) {
+                            root.getChildren().remove(menu.nextButton.circle);
+                        }
                     }
 
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
@@ -157,7 +160,17 @@ public class BombermanGame extends Application {
                     game = new GamePlay();
                     game.start(theStage, theScene, gc);
                     status = STATUS.GAMEPLAY;
-                    System.out.println("restart");
+                }
+
+                if (status.equals(STATUS.HIGHSCORE)) {
+                    clearScreen(gc);
+                    try {
+                        menu.homeLayer.clear();
+                        menu.highScoreLayer.render(gc);
+                        status = STATUS.STOP;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
 
                 if(music.equals(MUSIC.ON)) {
