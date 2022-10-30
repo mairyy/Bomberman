@@ -5,14 +5,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 
-public class PauseLayer {
+public class PauseLayer extends Menu {
     public static Sprite pauseImg = new Sprite(new Image("pauseLayer.png"), 0, 0, 0, 0);
 
-    public static void load() {
+    public void load() {
         pauseImg.load();
     }
 
-    public static void render(GraphicsContext gc) {
+    public void render(GraphicsContext gc) {
         pauseImg.render(gc);
         MenuControl.restartButton.circle.setCenterX(300);
         MenuControl.restartButton.circle.setCenterY(450);
@@ -25,7 +25,7 @@ public class PauseLayer {
         BombermanGame.root.getChildren().add(MenuControl.homeButton.circle);
     }
 
-    public static void clear() {
+    public void clear() {
         BombermanGame.root.getChildren().remove(MenuControl.restartButton.circle);
         BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
         BombermanGame.root.getChildren().remove(MenuControl.homeButton.circle);

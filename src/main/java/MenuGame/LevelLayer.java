@@ -11,14 +11,14 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class LevelLayer {
+public class LevelLayer extends Menu {
     public static Image levelImg = new Image("level.png");
     public static Button easyButton = new Button(levelImg, 400, 100, 140, 260, false);
     public static Button normalButton = new Button(levelImg, 400, 100, 140, 350, false);
     public static Button hardButton = new Button(levelImg, 400, 100, 140, 440, false);
     public static ArrayList<Button> rectangleButtons = new ArrayList<Button>();
 
-    public void createLevelButton() {
+    public void load() {
         easyButton.rectangle = new Rectangle(295, 200, easyButton.getWidth(), easyButton.getHeight());
         easyButton.rectangle.setFill(new ImagePattern(easyButton.cropImage()));
 
@@ -33,7 +33,7 @@ public class LevelLayer {
         rectangleButtons.add(hardButton);
     }
 
-    public void renderLevelButton() {
+    public void render(GraphicsContext gc) {
         BombermanGame.root.getChildren().remove(MenuControl.helpButton.circle);
         BombermanGame.root.getChildren().remove(MenuControl.settingButton.circle);
         BombermanGame.root.getChildren().remove(MenuControl.highScoreButton.circle);
@@ -82,7 +82,7 @@ public class LevelLayer {
         }
     }
 
-    public static void clear() {
+    public void clear() {
         BombermanGame.root.getChildren().remove(easyButton.rectangle);
         BombermanGame.root.getChildren().remove(normalButton.rectangle);
         BombermanGame.root.getChildren().remove(hardButton.rectangle);

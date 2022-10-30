@@ -76,8 +76,7 @@ public class BombermanGame extends Application {
                         menu.levelLayer.clear();
                     }
                     if(root.getChildren().contains(menu.musicButton.circle)) {
-                        root.getChildren().remove(menu.musicButton.circle);
-                        root.getChildren().remove(menu.soundButton.circle);
+                        menu.settingsLayer.clear();
                     }
                     menu.homeLayer.render(gc);
                     status = STATUS.STOP;
@@ -88,7 +87,7 @@ public class BombermanGame extends Application {
                         status = STATUS.GAMEPLAY;
                     } else {
                         clearScreen(gc);
-                        menu.levelLayer.renderLevelButton();
+                        menu.levelLayer.render(gc);
                         System.out.println(level);
                         status = STATUS.STOP;
                     }
@@ -96,7 +95,7 @@ public class BombermanGame extends Application {
 
                 if (status.equals(STATUS.SETTINGS)) {
                     clearScreen(gc);
-                    menu.settingsLayer.renderButton();
+                    menu.settingsLayer.render(gc);
                     status = STATUS.STOP;
                 }
 
