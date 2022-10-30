@@ -66,9 +66,11 @@ public class SoundGame {
         }
     }
 
-    public void close() {
-        soundPlayerMove.stop();
-        soundPlayerDead.stop();
+    public void closeMenu() {
         musicMenu.stop();
+    }
+
+    public void close() {
+
     }
 }

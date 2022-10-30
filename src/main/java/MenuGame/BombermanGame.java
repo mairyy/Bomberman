@@ -172,13 +172,13 @@ public class BombermanGame extends Application {
                     }
                 }
 
-                if(music.equals(MUSIC.ON)) {
-                    if(status == STATUS.GAMEPLAY) {
-                        soundGame.playSound(game.map, game.events);
-                    }
-                    else {
-                        soundGame.playSoundMenu();
-                    }
+                if(music.equals(MUSIC.ON) && !status.equals(STATUS.GAMEPLAY)) {
+                    soundGame.playSoundMenu();
+                } else {
+                    soundGame.closeMenu();
+                }
+                if(sound.equals(SOUND.ON) && status.equals(STATUS.GAMEPLAY)) {
+                    soundGame.playSound(game.map, game.events);
                 } else {
                     soundGame.close();
                 }
