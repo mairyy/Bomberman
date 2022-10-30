@@ -179,6 +179,8 @@ public class BombermanGame extends Application {
                     else {
                         soundGame.playSoundMenu();
                     }
+                } else {
+                    soundGame.close();
                 }
             }
         };

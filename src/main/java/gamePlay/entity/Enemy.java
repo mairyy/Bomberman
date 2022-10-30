@@ -104,6 +104,7 @@ public class Enemy extends MoveEntity {
    public void eatBom() {
         for(int i = 0; i < map.boms.size(); i++) {
             if(this.isColling(map.boms.get(i))) {
+                map.arrMap[map.boms.get(i).positionY/width][map.boms.get(i).positionX/height] = 1;
                 map.boms.remove(i);
             }
         }

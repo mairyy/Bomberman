@@ -65,4 +65,10 @@ public class SoundGame {
             map.boms.get(i).playSound();
         }
     }
+
+    public void close() {
+        soundPlayerMove.stop();
+        soundPlayerDead.stop();
+        musicMenu.stop();
+    }
 }
