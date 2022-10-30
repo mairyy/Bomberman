@@ -1,5 +1,6 @@
 package MenuGame;
 
+import MenuGame.Button.Button;
 import MenuGame.HighScore.HighScoreLayer;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -106,21 +107,21 @@ public class MenuControl {
                     // index = 9 là nút music, index = 10 là nút sound
                     else if (index == 9) {
                         if (BombermanGame.music.equals(MUSIC.OFF)) {
-                            circleButtons.get(index).image = buttonImage;
+                            circleButtons.get(index).setImage(buttonImage);
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
                             BombermanGame.music = MUSIC.ON;
                         } else {
-                            circleButtons.get(index).image = new Image("Button/button (1).png");
+                            circleButtons.get(index).setImage(new Image("Button/button (1).png"));
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
                             BombermanGame.music = MUSIC.OFF;
                         }
                     } else {
                         if (BombermanGame.sound.equals(SOUND.OFF)) {
-                            circleButtons.get(index).image = buttonImage;
+                            circleButtons.get(index).setImage(buttonImage);
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
                             BombermanGame.sound = SOUND.ON;
                         } else {
-                            circleButtons.get(index).image = new Image("Button/button (1).png");
+                            circleButtons.get(index).setImage(new Image("Button/button (1).png"));
                             circleButtons.get(index).circle.setFill(new ImagePattern(circleButtons.get(index).cropImage()));
                             BombermanGame.sound = SOUND.OFF;
                         }

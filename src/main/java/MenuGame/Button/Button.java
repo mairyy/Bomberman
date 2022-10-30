@@ -1,4 +1,4 @@
-package MenuGame;
+package MenuGame.Button;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;

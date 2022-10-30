@@ -1,5 +1,6 @@
 package MenuGame;
 
+import MenuGame.Button.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

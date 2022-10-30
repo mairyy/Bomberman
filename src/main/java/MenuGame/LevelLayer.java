@@ -1,5 +1,6 @@
 package MenuGame;
 
+import MenuGame.Button.Button;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.ColorAdjust;
@@ -18,13 +19,13 @@ public class LevelLayer {
     public static ArrayList<Button> rectangleButtons = new ArrayList<Button>();
 
     public void createLevelButton() {
-        easyButton.rectangle = new Rectangle(295, 200, easyButton.width, easyButton.height);
+        easyButton.rectangle = new Rectangle(295, 200, easyButton.getWidth(), easyButton.getHeight());
         easyButton.rectangle.setFill(new ImagePattern(easyButton.cropImage()));
 
-        normalButton.rectangle = new Rectangle(295, 350, normalButton.width, normalButton.height);
+        normalButton.rectangle = new Rectangle(295, 350, normalButton.getWidth(), normalButton.getHeight());
         normalButton.rectangle.setFill(new ImagePattern(normalButton.cropImage()));
 
-        hardButton.rectangle = new Rectangle(295, 500, hardButton.width, hardButton.height);
+        hardButton.rectangle = new Rectangle(295, 500, hardButton.getWidth(), hardButton.getHeight());
         hardButton.rectangle.setFill(new ImagePattern(hardButton.cropImage()));
 
         rectangleButtons.add(easyButton);

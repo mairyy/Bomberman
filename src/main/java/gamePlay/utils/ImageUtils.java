@@ -9,7 +9,7 @@ import javafx.scene.image.WritableImage;
 public class ImageUtils {
     public static Image loadImage(String path) {
         File file = new File(path);
-        System.out.println("Loading MenuGame.Sprite sheet " + file.exists());
+        System.out.println("Loading main.java.MenuGame.Button.Sprite sheet " + file.exists());
         String imagePath = file.getAbsolutePath();
         System.out.println("Before Imagepath " + imagePath);
         if (File.separatorChar == '\\') {

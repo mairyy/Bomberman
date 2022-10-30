@@ -1,4 +1,4 @@
-package MenuGame;
+package MenuGame.Button;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.*;
