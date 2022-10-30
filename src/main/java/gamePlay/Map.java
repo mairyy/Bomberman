@@ -119,6 +119,10 @@ public class Map {
                             enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 2));
                             arrMap[i][j] = 1;
                             break;
+                        case 14:
+                            enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 8));
+                            arrMap[i][j] = 1;
+                            break;
                         default:
                             arrMap[i][j] = 1;
                             break;
@@ -178,9 +182,8 @@ public class Map {
         for (int i = 0; i < enemies.size(); i++) {
             if(!enemies.get(i).isEndGame()) {
                 enemies.get(i).move();
-                if (enemies.get(i).isColling(player)) {
+                if (enemies.get(i).isColling(player) && !enemies.get(i).isDestroy()) {
                     player.setDestroy(true);
-                    System.out.println(player.isDestroy());
                 }
             } else {
                 enemies.remove(i);

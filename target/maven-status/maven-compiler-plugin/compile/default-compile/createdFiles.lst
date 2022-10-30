@@ -33,11 +33,9 @@ MenuGame\LevelLayer$1.class
 Main.class
 gamePlay\entity\BFS\BFS.class
 gamePlay\utils\ImageUtils.class
-MenuGame\Sprite.class
 MenuGame\BombermanGame$LEVEL.class
 gamePlay\entity\Wall.class
 gamePlay\entity\Player.class
-MenuGame\Button.class
 MenuGame\LevelLayer.class
 gamePlay\entity\Bom.class
 gamePlay\entity\Entity.class

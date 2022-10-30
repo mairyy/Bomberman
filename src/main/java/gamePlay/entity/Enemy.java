@@ -22,6 +22,7 @@ public class Enemy extends MoveEntity {
     //0 normal
     //1 AI
     //2 move brick
+    //8 eat bom
     private int numberOfFrameAlive = 4;
     private int numberOfFrameDEAD = 5;
     private double frame = 0;
@@ -92,10 +93,20 @@ public class Enemy extends MoveEntity {
                AIMove(map.arrMap, realPositionY/width, realPositionX/height, map.player.realPositionY/width, map.player.realPositionX/height);
            }
            if (numberOfType == 2) {
-               moveBrick(map.arrMap);
+               randomMove(map.arrMap);
+           }
+           if (numberOfType == 8) {
+               randomMove(map.arrMap);
+               eatBom();
            }
        }
-
+   }
+   public void eatBom() {
+        for(int i = 0; i < map.boms.size(); i++) {
+            if(this.isColling(map.boms.get(i))) {
+                map.boms.remove(i);
+            }
+        }
    }
 
    public void setAnimationMove(double time) {
@@ -116,6 +127,26 @@ public class Enemy extends MoveEntity {
             endGame = true;
         }
    }
+    public boolean provisoEnemy(int number) {
+        if (isCanMoveBrick()) {
+            if (number != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if(numberOfType != 8) {
+            if (number == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if(number == 1 || number == 6) {
+                return true;
+            }
+            return false;
+        }
+    }
 
     public void randomMove(int[][] mapArr) {
         Random generate = new Random();
@@ -123,7 +154,7 @@ public class Enemy extends MoveEntity {
         if (statusMove == 0) {
             if (positionY != realPositionY) {
                 positionY -= velocity;
-            } else if (mapArr[realPositionY / height - 1][realPositionX / width] == 1) {
+            } else if (provisoEnemy(mapArr[realPositionY / height - 1][realPositionX / width])) {
                 positionY -= velocity;
             } else {
                 statusMove = num;
@@ -132,7 +163,7 @@ public class Enemy extends MoveEntity {
         if (statusMove == 1) {
             if (positionY != realPositionY) {
                 positionY += velocity;
-            } else if (mapArr[realPositionY / height + 1][realPositionX / width] == 1) {
+            } else if (provisoEnemy(mapArr[realPositionY / height + 1][realPositionX / width])) {
                 positionY += velocity;
             } else {
                 statusMove = num;
@@ -142,7 +173,7 @@ public class Enemy extends MoveEntity {
         if (statusMove == 2) {
             if (positionX != realPositionX) {
                 positionX -= velocity;
-            } else if (mapArr[realPositionY / height][realPositionX / width - 1] == 1) {
+            } else if (provisoEnemy(mapArr[realPositionY / height][realPositionX / width - 1])) {
                 positionX -= velocity;
             } else {
                 statusMove = num;
@@ -151,51 +182,7 @@ public class Enemy extends MoveEntity {
         if (statusMove == 3) {
             if (positionX != realPositionX) {
                 positionX += velocity;
-            } else if (mapArr[realPositionY / height][realPositionX / width + 1] == 1) {
-                positionX += velocity;
-            } else {
-                statusMove = num;
-            }
-        }
-        realPositionX = ((positionX + width/2)/width) * width;
-        realPositionY = ((positionY + height/2)/height) * height;
-    }
-
-    public void moveBrick(int[][] mapArr) {
-        Random generate = new Random();
-        int num = generate.nextInt(4);
-        if (statusMove == 0) {
-            if (positionY != realPositionY) {
-                positionY -= velocity;
-            } else if (mapArr[realPositionY / height - 1][realPositionX / width] != 0) {
-                positionY -= velocity;
-            } else {
-                statusMove = num;
-            }
-        }
-        if (statusMove == 1) {
-            if (positionY != realPositionY) {
-                positionY += velocity;
-            } else if (mapArr[realPositionY / height + 1][realPositionX / width] != 0) {
-                positionY += velocity;
-            } else {
-                statusMove = num;
-            }
-
-        }
-        if (statusMove == 2) {
-            if (positionX != realPositionX) {
-                positionX -= velocity;
-            } else if (mapArr[realPositionY / height][realPositionX / width - 1] != 0) {
-                positionX -= velocity;
-            } else {
-                statusMove = num;
-            }
-        }
-        if (statusMove == 3) {
-            if (positionX != realPositionX) {
-                positionX += velocity;
-            } else if (mapArr[realPositionY / height][realPositionX / width + 1] != 0) {
+            } else if (provisoEnemy(mapArr[realPositionY / height][realPositionX / width + 1])) {
                 positionX += velocity;
             } else {
                 statusMove = num;
