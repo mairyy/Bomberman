@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class HighScoreLayer extends Text {
-    public static Sprite highScoreImg = new Sprite(new Image("highScoreText.png"), 200, -90, 0, 0);
+    public static Sprite highScoreImg = new Sprite(new Image("highScoreText.png"), 210, -90, 0, 0);
 
     public void load() {
         highScoreImg.setrHeight(400);

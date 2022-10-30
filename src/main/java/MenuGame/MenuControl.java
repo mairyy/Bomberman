@@ -39,7 +39,7 @@ public class MenuControl {
         homeLayer.load();
         createCircleButton();
         handleButton(gc);
-        levelLayer.createLevelButton();
+        levelLayer.load();
         levelLayer.handleLevelButton(gc);
         helpLayer.load();
         winLayer.load();

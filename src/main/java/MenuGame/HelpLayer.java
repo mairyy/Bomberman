@@ -4,7 +4,7 @@ import MenuGame.Button.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class HelpLayer {
+public class HelpLayer extends Menu {
     public static Sprite helpLayerImage = new Sprite(new Image("helpLayer.png"), 0, 0, 0, 0, 800, 800);
 
     public void load() {
@@ -18,5 +18,9 @@ public class HelpLayer {
         BombermanGame.root.getChildren().remove(MenuControl.startButton.circle);
         helpLayerImage.render(gc);
         BombermanGame.root.getChildren().add(MenuControl.backButton.circle);
+    }
+
+    public void clear() {
+
     }
 }
