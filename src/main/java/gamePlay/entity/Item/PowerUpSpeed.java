@@ -22,7 +22,7 @@ public class PowerUpSpeed extends Item {
     @Override
     public void update() {
         if(checkColling()) {
-            map.player.setVelocity(map.player.getVelocity()*2);
+            map.player.setVelocity(map.player.getVelocity() + 1);
             isDestroy = true;
         }
     }
