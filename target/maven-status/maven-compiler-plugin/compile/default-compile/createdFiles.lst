@@ -36,6 +36,5 @@ MenuGame\BombermanGame$LEVEL.class
 gamePlay\entity\Wall.class
 gamePlay\entity\Player.class
 MenuGame\LevelLayer.class
-MenuGame\BombermanGame$2.class
 gamePlay\entity\Bom.class
 gamePlay\entity\Entity.class
