@@ -10,7 +10,7 @@ public class AntiBomb extends Item{
         loadImage("resource/image/PowerUps.png");
         width = (int) (image.getWidth()-27)/10;
         height = (int) (image.getHeight()-6)/3;
-        Image newImage = ImageUtils.crop(image, (3+width)*6, 1*height, width, height);
+        Image newImage = ImageUtils.crop(image, (3+width)*6, height+3, width, height);
         this.image = newImage;
         width = GamePlay.widthUnit;
         height = GamePlay.widthUnit;
