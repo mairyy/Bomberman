@@ -57,7 +57,7 @@ public class HighScoreLayer extends Score {
                 drawText(gc, Color.BLACK, bodyFont, ranking[i], x, y);
                 x += 180;
             } else {
-                drawText(gc, Color.BLACK, bodyFont, String.format("%.2f", Double.parseDouble(ranking[i])), x, y);
+                drawText(gc, Color.BLACK, bodyFont, String.format("%.0f", Double.parseDouble(ranking[i])), x, y);
                 y += 100;
                 x -= 180;
             }
@@ -96,7 +96,7 @@ public class HighScoreLayer extends Score {
     }
 
     public void resetRecord() {
-        String s = "0 0.00 0 0.00 0 0.00";
+        String s = "0 0 0 0 0 0";
         writeFile(new File("res/resource/map/record.txt"), s);
     }
 

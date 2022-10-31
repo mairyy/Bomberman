@@ -2,17 +2,12 @@ package MenuGame.Score;
 
 import MenuGame.MenuControl;
 import MenuGame.BombermanGame;
-import MenuGame.Button.Sprite;
 import gamePlay.entity.Item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ScoreBar extends Score {
-//    public static List<Item> itemList = new ArrayList<Item>();
     public void load() {
 
     }
@@ -36,9 +31,9 @@ public class ScoreBar extends Score {
 
         StringBuffer s = new StringBuffer("LEVEL: "+ level + "  ");
         s.append(scoreStr).append(": ").append(BombermanGame.game.score).append("  ");
-        s.append(timeStr).append(": ").append(String.format("%.2f", BombermanGame.game.timeGame));
+        s.append(timeStr).append(": ").append(String.format("%.0f", BombermanGame.game.maxTimeGame - BombermanGame.game.timeGame));
         drawText(gc, Color.WHITE, bodyFont, s.toString(), 10, 35);
-        int itemPositionX = 520;
+        int itemPositionX = 560;
         for (Item i : BombermanGame.game.map.removeItems) {
             i.setPosition(itemPositionX, 10);
             i.setHeight(30);
