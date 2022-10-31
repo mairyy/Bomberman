@@ -1,5 +1,6 @@
 package gamePlay;
 
+import MenuGame.BombermanGame;
 import gamePlay.entity.Item.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -31,7 +32,8 @@ public class Map {
     public Teleport teleport;
     public int[][] arrMap;
     public Player player = new Player();
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<Item>();
+    public List<Item> removeItems = new ArrayList<Item>();
 
     private int powerBom = 1;
 
@@ -157,6 +159,7 @@ public class Map {
         for (int i = 0; i < items.size(); i++) {
             items.get(i).update();
             if(items.get(i).isDestroy()){
+                removeItems.add(items.get(i));
                 items.remove(i);
                 i--;
             }

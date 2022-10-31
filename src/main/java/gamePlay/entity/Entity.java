@@ -23,6 +23,14 @@ public abstract class Entity {
     /**
      * setter and getter.
      */
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public int getPositionX() {
         return positionX;
     }
