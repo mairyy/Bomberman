@@ -13,6 +13,14 @@ public class Button extends Sprite {
     public Circle circle;
     public Rectangle rectangle;
 
+    public void setrWidth(int rWidth) {
+        super.rWidth = rWidth;
+    }
+
+    public void setrHeight(int rHeight) {
+        super.rHeight = rHeight;
+    }
+
     public Button(Image image, int x, int y, int xU, int yU, boolean isCircle) {
         super(image, x, y, xU, yU);
         if (isCircle) {

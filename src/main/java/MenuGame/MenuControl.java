@@ -2,6 +2,7 @@ package MenuGame;
 
 import MenuGame.Button.Button;
 import MenuGame.Score.HighScoreLayer;
+import MenuGame.Score.ScoreBar;
 import gamePlay.entity.Bom;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,6 +24,7 @@ public class MenuControl {
     public static WinLayer winLayer = new WinLayer();
     public static GameOver gameOver = new GameOver();
     public static PauseLayer pauseLayer = new PauseLayer();
+    public static ScoreBar scoreBar = new ScoreBar();
     public ArrayList<Button> circleButtons = new ArrayList<Button>();
     public static final Image buttonImage = new Image("Button/button.png");
     public static Button startButton = new Button(buttonImage, 20, 250, 210, 10, true);
@@ -35,7 +37,7 @@ public class MenuControl {
     public static Button restartButton = new Button(buttonImage, 500, 100, 120, 168, true);
     public static Button nextButton = new Button(buttonImage, 500, 100, 120, 90, true);
     public static Button homeButton = new Button(buttonImage, 500, 100, 310, 10, true);
-    public static Button pauseButton = new Button(new Image("Button/pauseButton.png"), 500, 100, 720, 8, true);
+    public static Button pauseButton = new Button(new Image("Button/pauseButton1.png"), 500, 100, 0, 8, true);
 
     public MenuControl(GraphicsContext gc, BombermanGame bombermanGame) {
         this.bombermanGame = bombermanGame;
@@ -82,8 +84,10 @@ public class MenuControl {
         homeButton.circle = new Circle(500, 700, 45);
         homeButton.circle.setFill(new ImagePattern(homeButton.cropImage()));
 
-        pauseButton.circle = new Circle(770, 40, 20);
-        pauseButton.circle.setFill(new ImagePattern(pauseButton.cropImage()));
+        pauseButton.setrWidth(50);
+        pauseButton.setrHeight(50);
+        pauseButton.circle = new Circle(775, 25, 20);
+        pauseButton.circle.setFill(new ImagePattern(pauseButton.getImage()));
 
         circleButtons.add(startButton);
         circleButtons.add(helpButton);

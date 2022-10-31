@@ -122,9 +122,10 @@ public class BombermanGame extends Application {
                     game.start(theStage, theScene, gc);
                     game.map.update(time, game.events);
                     game.map.render(gc);
-                    if (!root.getChildren().contains(menu.pauseButton.circle)) {
-                        root.getChildren().add(menu.pauseButton.circle);
-                    }
+                    menu.scoreBar.render(gc);
+//                    if (!root.getChildren().contains(menu.pauseButton.circle)) {
+//                        root.getChildren().add(menu.pauseButton.circle);
+//                    }
                     if (game.isEnd) {
                         try {
                             TimeUnit.SECONDS.sleep(2);
