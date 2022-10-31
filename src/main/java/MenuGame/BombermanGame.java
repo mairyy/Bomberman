@@ -46,7 +46,6 @@ public class BombermanGame extends Application {
     @Override
     public void start(Stage theStage) {
         menu(theStage);
-//        readRecord();
     }
     public void menu(Stage theStage) {
         theStage.setTitle("Bomberman");
@@ -123,9 +122,6 @@ public class BombermanGame extends Application {
                     game.map.update(time, game.events);
                     game.map.render(gc);
                     menu.scoreBar.render(gc);
-//                    if (!root.getChildren().contains(menu.pauseButton.circle)) {
-//                        root.getChildren().add(menu.pauseButton.circle);
-//                    }
                     if (game.isEnd) {
                         try {
                             TimeUnit.SECONDS.sleep(2);
