@@ -22,10 +22,12 @@ gamePlay\Map.class
 gamePlay\entity\Enemy.class
 gamePlay\entity\Teleport.class
 gamePlay\GamePlay.class
+gamePlay\entity\Item\TimeUp.class
 gamePlay\SoundGame$1.class
 gamePlay\SoundGame.class
 gamePlay\entity\Item\Item.class
 gamePlay\entity\Item\MoveBrick.class
+gamePlay\entity\Item\AntiBomb.class
 main\parameterGame.class
 MenuGame\SettingsLayer.class
 MenuGame\LevelLayer$1.class

@@ -23,8 +23,6 @@ public class Bom extends Entity {
     private boolean isEnd = false;
     private Map map;
     final MediaPlayer soundBom;
-
-
     public void setTimeBom(double timeBom) {
         this.timeBom = timeBom;
     }
@@ -179,8 +177,10 @@ public class Bom extends Entity {
             Integer i = posY + posX* map.getLenWidth()*10;
             map.walls.get(i).setDestroy(true);
         }
-        if(map.player.getRealPositionX() == posX*width && map.player.getRealPositionY() == posY*height) {
-            map.player.setDestroy(true);
+        if(!map.player.isAntiBomb()) {
+            if(map.player.getRealPositionX() == posX*width && map.player.getRealPositionY() == posY*height) {
+                map.player.setDestroy(true);
+            }
         }
         for(int i = 0; i < map.enemies.size(); i++) {
             if(map.enemies.get(i).getRealPositionX() == posX*width && map.enemies.get(i).getRealPositionY() == posY*height) {

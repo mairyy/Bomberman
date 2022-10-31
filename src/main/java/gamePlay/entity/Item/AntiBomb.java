@@ -5,12 +5,12 @@ import gamePlay.Map;
 import gamePlay.utils.ImageUtils;
 import javafx.scene.image.Image;
 
-public class TimeUp extends Item {
-    public TimeUp(int positionX, int positionY, Map map) {
+public class AntiBomb extends Item{
+    public AntiBomb(int positionX, int positionY, Map map) {
         loadImage("resource/image/PowerUps.png");
         width = (int) (image.getWidth()-27)/10;
         height = (int) (image.getHeight()-6)/3;
-        Image newImage = ImageUtils.crop(image, (3+width)*8, 1*height, width, height);
+        Image newImage = ImageUtils.crop(image, (3+width)*6, 1*height, width, height);
         this.image = newImage;
         width = GamePlay.widthUnit;
         height = GamePlay.widthUnit;
@@ -22,7 +22,7 @@ public class TimeUp extends Item {
     @Override
     public void update() {
         if(checkColling()) {
-            map.gamePlay.maxTimeGame += 60;
+            map.player.setAntiBomb(true);
             isDestroy = true;
         }
     }

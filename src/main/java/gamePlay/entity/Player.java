@@ -19,6 +19,16 @@ public class Player extends MoveEntity {
     private double frameDead = 0;
     double frame = 0;
     int status = 0;
+    private boolean antiBomb = false;
+
+    public boolean isAntiBomb() {
+        return antiBomb;
+    }
+
+    public void setAntiBomb(boolean antiBomb) {
+        this.antiBomb = antiBomb;
+    }
+
     private final Image[][] animations = new Image[numberStatus][numberFrame];
     private final Image[] animationsDead = new Image[numberFrameDead];
 

@@ -125,6 +125,16 @@ public class Map {
                             enemies.add(new Enemy(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this, 8));
                             arrMap[i][j] = 1;
                             break;
+                        case 15:
+                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            arrMap[i][j] = 2;
+                            items.add(new TimeUp(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            break;
+                        case 16:
+                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            arrMap[i][j] = 2;
+                            items.add(new AntiBomb(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            break;
                         default:
                             arrMap[i][j] = 1;
                             break;
