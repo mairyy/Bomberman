@@ -5,9 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public abstract class Score {
     protected Font titleFont = Font.font("Comic Sans MS", FontWeight.BOLD, 30);
@@ -33,6 +31,16 @@ public abstract class Score {
             System.out.println(e.getMessage());
         }
         return ranking.toString();
+    }
+
+    protected void writeFile(File path, String s) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            fw.write(s.toString());
+            fw.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     protected void drawText(GraphicsContext gc, Color color, Font font, String str, int x, int y) {
