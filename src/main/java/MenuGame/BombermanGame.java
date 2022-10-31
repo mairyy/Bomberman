@@ -32,7 +32,8 @@ public class BombermanGame extends Application {
     public enum LEVEL {
         EASY, MEDIUM, HARD, NONE
     }
-    private GamePlay game = new GamePlay();
+    public int number = 1;
+    public GamePlay game = new GamePlay(number);
     private SoundGame soundGame = new SoundGame();
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 800;
@@ -66,7 +67,7 @@ public class BombermanGame extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         clearScreen(gc);
 
-        MenuControl menu = new MenuControl(gc);
+        MenuControl menu = new MenuControl(gc, this);
 
         theStage.show();
         final Long[] startNanotime = {System.nanoTime()};
@@ -121,6 +122,7 @@ public class BombermanGame extends Application {
 
                     double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
+                    game.start(theStage, theScene, gc);
                     game.map.update(time, game.events);
                     game.map.render(gc);
                     if (!root.getChildren().contains(menu.pauseButton.circle)) {
@@ -155,7 +157,7 @@ public class BombermanGame extends Application {
 
                 if (status.equals(STATUS.HOME)) {
                     clearScreen(gc);
-                    game = new GamePlay();
+                    game = new GamePlay(number);
                     game.start(theStage, theScene, gc);
                     if (root.getChildren().contains(menu.nextButton.circle)) {
                         root.getChildren().remove(menu.nextButton.circle);
@@ -166,8 +168,25 @@ public class BombermanGame extends Application {
                 }
 
                 if(status.equals(STATUS.RESTART)) {
-                    game = new GamePlay();
+                    game = new GamePlay(number);
                     game.start(theStage, theScene, gc);
+                    status = STATUS.GAMEPLAY;
+                }
+
+                if(status.equals(STATUS.NEXT)) {
+                    if(level.equals(LEVEL.EASY)) {
+                        level = LEVEL.MEDIUM;
+                        number = 2;
+                        game = new GamePlay(number);
+                    } else if(level.equals(LEVEL.MEDIUM)) {
+                        level = LEVEL.HARD;
+                        number = 3;
+                        game = new GamePlay(number);
+                    }  else if(level.equals(LEVEL.HARD)) {
+                        level = LEVEL.EASY;
+                        number = 1;
+                        game = new GamePlay(number);
+                    }
                     status = STATUS.GAMEPLAY;
                 }
 

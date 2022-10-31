@@ -1,6 +1,8 @@
 package MenuGame;
 
 import MenuGame.Button.Button;
+import gamePlay.GamePlay;
+import gamePlay.entity.Bom;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.ColorAdjust;
@@ -9,14 +11,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class LevelLayer extends Menu {
+    public BombermanGame bombermanGame;
     public static Image levelImg = new Image("level.png");
     public static Button easyButton = new Button(levelImg, 400, 100, 140, 260, false);
     public static Button normalButton = new Button(levelImg, 400, 100, 140, 350, false);
     public static Button hardButton = new Button(levelImg, 400, 100, 140, 440, false);
     public static ArrayList<Button> rectangleButtons = new ArrayList<Button>();
+
 
     public void load() {
         easyButton.rectangle = new Rectangle(295, 200, easyButton.getWidth(), easyButton.getHeight());
@@ -44,15 +49,27 @@ public class LevelLayer extends Menu {
         BombermanGame.root.getChildren().add(MenuControl.backButton.circle);
     }
 
-    public void handleLevelButton(GraphicsContext gc) {
+    public void handleLevelButton(GraphicsContext gc, BombermanGame bombermanGame) {
         for (int i = 0; i < rectangleButtons.size(); i++) {
             int index = i;
 
             rectangleButtons.get(index).rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    BombermanGame.level = BombermanGame.LEVEL.values()[index];
-                    BombermanGame.status = STATUS.GAMEPLAY;
+                    bombermanGame.level = BombermanGame.LEVEL.values()[index];
+                    bombermanGame.status = STATUS.GAMEPLAY;
+                    if(bombermanGame.level.equals(BombermanGame.LEVEL.EASY)) {
+                        bombermanGame.game = new GamePlay(1);
+                        bombermanGame.number = 1;
+                    }
+                    if(bombermanGame.level.equals(BombermanGame.LEVEL.MEDIUM)) {
+                        bombermanGame.game = new GamePlay(2);
+                        bombermanGame.number = 2;
+                    }
+                    if(bombermanGame.level.equals(BombermanGame.LEVEL.HARD)) {
+                        bombermanGame.game = new GamePlay(3);
+                        bombermanGame.number = 3;
+                    }
                     System.out.println(BombermanGame.level);
                 }
             });

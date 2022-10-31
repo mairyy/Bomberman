@@ -2,6 +2,7 @@ package MenuGame;
 
 import MenuGame.Button.Button;
 import MenuGame.HighScore.HighScoreLayer;
+import gamePlay.entity.Bom;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.ColorAdjust;
@@ -13,6 +14,7 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 public class MenuControl {
+    public static BombermanGame bombermanGame;
     public static HomeLayer homeLayer = new HomeLayer();
     public static LevelLayer levelLayer = new LevelLayer();
     public static SettingsLayer settingsLayer = new SettingsLayer();
@@ -35,12 +37,13 @@ public class MenuControl {
     public static Button homeButton = new Button(buttonImage, 500, 100, 310, 10, true);
     public static Button pauseButton = new Button(new Image("Button/pauseButton.png"), 500, 100, 720, 8, true);
 
-    public MenuControl(GraphicsContext gc) {
+    public MenuControl(GraphicsContext gc, BombermanGame bombermanGame) {
+        this.bombermanGame = bombermanGame;
         homeLayer.load();
         createCircleButton();
         handleButton(gc);
         levelLayer.load();
-        levelLayer.handleLevelButton(gc);
+        levelLayer.handleLevelButton(gc, bombermanGame);
         helpLayer.load();
         winLayer.load();
         gameOver.load();

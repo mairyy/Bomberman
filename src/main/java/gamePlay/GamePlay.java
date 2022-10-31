@@ -30,10 +30,13 @@ public class GamePlay {
     public Map map = new Map(this);
     public boolean isEnd = false;
     public List<KeyCode> events = new ArrayList<>();
+    public GamePlay(int level) {
+        String s = "res/resource/map/map" + level + ".txt";
+        File file = new File(s);
+        map.loadMap(file);
+    }
 
     public void start(Stage stage, Scene scene, GraphicsContext gc)  {
-        File file = new File("res/resource/map/map1.txt");
-        map.loadMap(file);
 
         //handle key event.
         scene.setOnKeyPressed(
@@ -55,7 +58,6 @@ public class GamePlay {
                 }
         );
 
-        stage.show();
     }
 
 }
