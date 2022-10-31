@@ -88,6 +88,9 @@ public class BombermanGame extends Application {
                     if(root.getChildren().contains(menu.musicButton.circle)) {
                         menu.settingsLayer.clear();
                     }
+                    if(root.getChildren().contains(menu.restartButton.circle)) {
+                        menu.highScoreLayer.clear();
+                    }
                     menu.homeLayer.render(gc);
                     status = STATUS.STOP;
                 }

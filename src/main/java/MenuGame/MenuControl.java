@@ -1,7 +1,7 @@
 package MenuGame;
 
 import MenuGame.Button.Button;
-import MenuGame.HighScore.HighScoreLayer;
+import MenuGame.Score.HighScoreLayer;
 import gamePlay.entity.Bom;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
