@@ -75,7 +75,7 @@ public class BFS {
                 }
             }
         }
-        return path;
+        return new ArrayList<>();
     }
 
     static void printPath(List<Point> path) {
