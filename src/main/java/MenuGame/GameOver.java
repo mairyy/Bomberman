@@ -22,7 +22,7 @@ public class GameOver extends Score implements Text {
         MenuControl.homeButton.circle.setCenterY(650);
         BombermanGame.root.getChildren().add(MenuControl.restartButton.circle);
         BombermanGame.root.getChildren().add(MenuControl.homeButton.circle);
-        drawText(gc, Color.BLACK, scoreFont, Integer.toString(BombermanGame.game.score), 355 ,500);
+        drawText(gc, Color.BLACK, scoreFont, Integer.toString(BombermanGame.game.score), 355, 500);
     }
 
     public void clear() {

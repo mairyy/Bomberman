@@ -58,15 +58,15 @@ public class LevelLayer extends Menu {
                 public void handle(MouseEvent event) {
                     bombermanGame.level = BombermanGame.LEVEL.values()[index];
                     bombermanGame.status = STATUS.GAMEPLAY;
-                    if(bombermanGame.level.equals(BombermanGame.LEVEL.EASY)) {
+                    if (bombermanGame.level.equals(BombermanGame.LEVEL.EASY)) {
                         bombermanGame.game = new GamePlay(1);
                         bombermanGame.number = 1;
                     }
-                    if(bombermanGame.level.equals(BombermanGame.LEVEL.MEDIUM)) {
+                    if (bombermanGame.level.equals(BombermanGame.LEVEL.MEDIUM)) {
                         bombermanGame.game = new GamePlay(2);
                         bombermanGame.number = 2;
                     }
-                    if(bombermanGame.level.equals(BombermanGame.LEVEL.HARD)) {
+                    if (bombermanGame.level.equals(BombermanGame.LEVEL.HARD)) {
                         bombermanGame.game = new GamePlay(3);
                         bombermanGame.number = 3;
                     }
