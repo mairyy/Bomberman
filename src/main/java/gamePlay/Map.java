@@ -52,12 +52,14 @@ public class Map {
     public void setPowerBom(int powerBom) {
         this.powerBom = powerBom;
     }
+
     public GamePlay gamePlay;
 
     public Map(GamePlay gamePlay) {
         this.gamePlay = gamePlay;
     }
 
+    //load các phần tử game.
     public void loadMap(File file) {
         try (BufferedReader inputStream = new BufferedReader(new FileReader(file))) {
             String line = inputStream.readLine();
@@ -72,11 +74,11 @@ public class Map {
                     int tmp = Integer.parseInt(arr[j]);
                     switch (tmp) {
                         case 00:
-                            walls.put(j*lenWidth*10 + i, new Wall(j * GamePlay.widthUnit, i * GamePlay.widthUnit));
+                            walls.put(j * lenWidth * 10 + i, new Wall(j * GamePlay.widthUnit, i * GamePlay.widthUnit));
                             arrMap[i][j] = 0;
                             break;
                         case 02:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             break;
                         case 03:
@@ -93,27 +95,27 @@ public class Map {
                             arrMap[i][j] = 1;
                             break;
                         case 07:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new PowerUpSpeed(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
                         case 8:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new AddBom(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
                         case 9:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new PowerUpBom(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
                         case 10:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             teleport = new Teleport(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this);
                             break;
                         case 11:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new MoveBrick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
@@ -126,12 +128,12 @@ public class Map {
                             arrMap[i][j] = 1;
                             break;
                         case 15:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new TimeUp(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
                         case 16:
-                            walls.put(j*lenWidth*10 + i ,new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
+                            walls.put(j * lenWidth * 10 + i, new Brick(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             arrMap[i][j] = 2;
                             items.add(new AntiBomb(j * GamePlay.widthUnit, i * GamePlay.widthUnit, this));
                             break;
@@ -146,10 +148,11 @@ public class Map {
         }
     }
 
+    //update các phần tử.
     public void update(double time, List<KeyCode> events) {
         handleInput(events);
         gamePlay.timeGame += time;
-        if(gamePlay.timeGame > gamePlay.maxTimeGame) {
+        if (gamePlay.timeGame > gamePlay.maxTimeGame) {
             player.setDestroy(true);
             player.setEndGame(true);
         }
@@ -168,7 +171,7 @@ public class Map {
         }
         for (int i = 0; i < items.size(); i++) {
             items.get(i).update();
-            if(items.get(i).isDestroy()){
+            if (items.get(i).isDestroy()) {
                 removeItems.add(items.get(i));
                 items.remove(i);
                 i--;
@@ -186,23 +189,23 @@ public class Map {
             walls.remove(i);
         }
         for (Enemy enemy : enemies) {
-            if(!enemy.isDestroy()) {
+            if (!enemy.isDestroy()) {
                 enemy.setAnimationMove(time);
             } else {
                 enemy.setFrameDead(time);
             }
         }
         for (int i = 0; i < enemies.size(); i++) {
-            if(!enemies.get(i).isEndGame()) {
+            if (!enemies.get(i).isEndGame()) {
                 enemies.get(i).move();
                 if (enemies.get(i).isColling(player) && !enemies.get(i).isDestroy()) {
                     player.setDestroy(true);
                 }
             } else {
                 enemies.remove(i);
-                if(gamePlay.timeGame < 50) {
+                if (gamePlay.timeGame < 50) {
                     gamePlay.score += 150;
-                } else if(gamePlay.timeGame < 100) {
+                } else if (gamePlay.timeGame < 100) {
                     gamePlay.score += 100;
                 } else {
                     gamePlay.score += 50;
@@ -212,6 +215,7 @@ public class Map {
         }
     }
 
+    //render.
     public void render(GraphicsContext gc) {
         background.render(gc);
         teleport.render(gc);
@@ -228,22 +232,23 @@ public class Map {
             }
         }
 
-        for(Entity enemy : enemies) {
+        for (Entity enemy : enemies) {
             enemy.render(gc);
         }
 
         if (!player.isEndGame()) {
             player.render(gc);
         }
-        if(player.isEndGame()) {
+        if (player.isEndGame()) {
             gamePlay.isEnd = true;
         }
     }
 
+    //xử lý input.
     public void handleInput(List<KeyCode> events) {
         if (events.contains(KeyCode.SPACE) &&
                 arrMap[player.getRealPositionY() / player.getHeight()][player.getRealPositionX() / player.getWidth()] == 1
-                 && player.getMaxTotalBom() > boms.size() &&
+                && player.getMaxTotalBom() > boms.size() &&
                 !player.isDestroy()) {
             Bom bom = new Bom(player.getRealPositionX(), player.getRealPositionY(), this);
             arrMap[bom.getPositionY() / GamePlay.widthUnit][bom.getPositionX() / GamePlay.widthUnit] = 6;

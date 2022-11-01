@@ -85,6 +85,7 @@ public class Player extends MoveEntity {
 
     }
 
+    //xử lý animation di chuyển.
     public void setAnimations(List<KeyCode> events, double time) {
         if (!events.isEmpty()) {
             if (events.contains(KeyCode.UP)) {

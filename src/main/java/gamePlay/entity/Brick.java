@@ -41,24 +41,24 @@ public class Brick extends Entity {
         if (!isDestroy) {
             gc.drawImage(images[0], positionX, positionY, width, height);
         } else {
-            if(!isEnd) {
+            if (!isEnd) {
                 gc.drawImage(images[(int) frame], positionX, positionY, width, height);
             }
         }
     }
 
 
+    //xử lý khi bị nổ.
     public void update(List<Integer> toRemove, double time) {
-        if(isDestroy) {
-            if(!isEnd) {
+        if (isDestroy) {
+            if (!isEnd) {
                 frame += time * 10;
                 if (frame >= numberFrame) {
                     isEnd = true;
                 }
-            }
-            else {
-                map.arrMap[positionY/height][positionX/width] = 1;
-                toRemove.add(positionX/width* map.getLenWidth()*10 + positionY/height);
+            } else {
+                map.arrMap[positionY / height][positionX / width] = 1;
+                toRemove.add(positionX / width * map.getLenWidth() * 10 + positionY / height);
             }
         }
     }

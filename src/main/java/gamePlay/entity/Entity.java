@@ -13,6 +13,7 @@ public abstract class Entity {
     protected int width;
     protected int height;
     protected boolean isDestroy = false;
+
     public Entity() {
         positionX = 0;
         positionY = 0;
@@ -34,43 +35,55 @@ public abstract class Entity {
     public int getPositionX() {
         return positionX;
     }
+
     public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
+
     public int getPositionY() {
         return positionY;
     }
+
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
+
     public void setPosition(int positionX, int positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
     }
+
     public int getWidth() {
         return width;
     }
+
     public void setWidth(int width) {
         this.width = width;
     }
+
     public int getHeight() {
         return height;
     }
+
     public void setHeight(int height) {
         this.height = height;
     }
+
     public void loadImage(String path) {
         image = new Image(path);
         width = (int) image.getWidth();
         height = (int) image.getHeight();
     }
+
     public boolean isDestroy() {
         return isDestroy;
     }
+
     public void setDestroy(boolean destroy) {
         isDestroy = destroy;
     }
-    public  void render(GraphicsContext gc) {
+
+    public void render(GraphicsContext gc) {
         gc.drawImage(image, positionX, positionY, width, height);
     }
 

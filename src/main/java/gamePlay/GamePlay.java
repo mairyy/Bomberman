@@ -30,20 +30,23 @@ public class GamePlay {
     public Map map = new Map(this);
     public boolean isEnd = false;
     public List<KeyCode> events = new ArrayList<>();
+
+    //load map.
     public GamePlay(int level) {
         String s = "res/resource/map/map" + level + ".txt";
         File file = new File(s);
         map.loadMap(file);
     }
 
-    public void start(Stage stage, Scene scene, GraphicsContext gc)  {
+    //nhận input.
+    public void start(Stage stage, Scene scene, GraphicsContext gc) {
 
         //handle key event.
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
-                        if(!events.contains(keyEvent.getCode())) {
+                        if (!events.contains(keyEvent.getCode())) {
                             events.add(keyEvent.getCode());
                         }
                     }

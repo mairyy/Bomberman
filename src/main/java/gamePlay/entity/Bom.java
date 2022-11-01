@@ -23,6 +23,7 @@ public class Bom extends Entity {
     private boolean isEnd = false;
     private Map map;
     final MediaPlayer soundBom;
+
     public void setTimeBom(double timeBom) {
         this.timeBom = timeBom;
     }
@@ -39,6 +40,7 @@ public class Bom extends Entity {
         return isExplode;
     }
 
+    //hàm khởi tạo.
     public Bom(int positionX, int positionY, Map map) {
         loadImage("resource/image/bombs.png");
         width = (int) image.getWidth() / 3;
@@ -49,12 +51,12 @@ public class Bom extends Entity {
         }
         animations[3] = animations[1];
         loadImage("resource/image/fires.png");
-        width = (int) ((image.getWidth()-3*6) / 7);
-        height = (int) ((image.getHeight()-3*4) / numberFameFire);
+        width = (int) ((image.getWidth() - 3 * 6) / 7);
+        height = (int) ((image.getHeight() - 3 * 4) / numberFameFire);
         int kc = 3;
         for (int i = 0; i < numberFameFire; i++) {
             for (int j = 0; j < 7; j++) {
-                Image newImage = ImageUtils.crop(image, j * (width + kc), i * (height+kc), width, height);
+                Image newImage = ImageUtils.crop(image, j * (width + kc), i * (height + kc), width, height);
                 explodeImage[i][j] = newImage;
             }
         }
@@ -67,51 +69,56 @@ public class Bom extends Entity {
         soundBom = new MediaPlayer(newSound);
     }
 
+    //render.
     public void render(GraphicsContext gc) {
         if (!isExplode) {
             gc.drawImage(animations[(int) frame], positionX, positionY, width, height);
         } else {
             gc.drawImage(explodeImage[(int) frame][0], positionX, positionY, width, height);
             //left
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                if(i == map.getPowerBom()) {
-                    if(map.arrMap[positionY/height][positionX/width-i] == 1) {
-                        gc.drawImage(explodeImage[(int) frame][6], positionX - width*i, positionY, width, height);
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                if (i == map.getPowerBom()) {
+                    if (map.arrMap[positionY / height][positionX / width - i] == 1) {
+                        gc.drawImage(explodeImage[(int) frame][6], positionX - width * i, positionY, width, height);
                     }
-                } else if(map.arrMap[positionY/height][positionX/width-i] == 1) {gc.drawImage(explodeImage[(int) frame][4], positionX - width*i, positionY, width, height);
+                } else if (map.arrMap[positionY / height][positionX / width - i] == 1) {
+                    gc.drawImage(explodeImage[(int) frame][4], positionX - width * i, positionY, width, height);
                 } else {
                     break;
                 }
             }
             //right
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                if(i == map.getPowerBom()) {
-                    if(map.arrMap[positionY/height][positionX/width+i] == 1) {
-                        gc.drawImage(explodeImage[(int) frame][5], positionX + width*i, positionY, width, height);
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                if (i == map.getPowerBom()) {
+                    if (map.arrMap[positionY / height][positionX / width + i] == 1) {
+                        gc.drawImage(explodeImage[(int) frame][5], positionX + width * i, positionY, width, height);
                     }
-                } else if(map.arrMap[positionY/height][positionX/width+i] == 1) {gc.drawImage(explodeImage[(int) frame][4], positionX + width*i, positionY, width, height);
+                } else if (map.arrMap[positionY / height][positionX / width + i] == 1) {
+                    gc.drawImage(explodeImage[(int) frame][4], positionX + width * i, positionY, width, height);
                 } else {
                     break;
                 }
             }
             //up
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                if(i == map.getPowerBom()) {
-                    if(map.arrMap[positionY/height-i][positionX/width] == 1) {
-                        gc.drawImage(explodeImage[(int) frame][3], positionX, positionY-height*i, width, height);
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                if (i == map.getPowerBom()) {
+                    if (map.arrMap[positionY / height - i][positionX / width] == 1) {
+                        gc.drawImage(explodeImage[(int) frame][3], positionX, positionY - height * i, width, height);
                     }
-                } else if(map.arrMap[positionY/height-i][positionX/width] == 1) {gc.drawImage(explodeImage[(int) frame][1], positionX, positionY - height*i, width, height);
+                } else if (map.arrMap[positionY / height - i][positionX / width] == 1) {
+                    gc.drawImage(explodeImage[(int) frame][1], positionX, positionY - height * i, width, height);
                 } else {
                     break;
                 }
             }
             //down
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                if(i == map.getPowerBom()) {
-                    if(map.arrMap[positionY/height+i][positionX/width] == 1) {
-                        gc.drawImage(explodeImage[(int) frame][2], positionX, positionY+height*i, width, height);
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                if (i == map.getPowerBom()) {
+                    if (map.arrMap[positionY / height + i][positionX / width] == 1) {
+                        gc.drawImage(explodeImage[(int) frame][2], positionX, positionY + height * i, width, height);
                     }
-                } else if(map.arrMap[positionY/height+i][positionX/width] == 1) {gc.drawImage(explodeImage[(int) frame][1], positionX, positionY + height*i, width, height);
+                } else if (map.arrMap[positionY / height + i][positionX / width] == 1) {
+                    gc.drawImage(explodeImage[(int) frame][1], positionX, positionY + height * i, width, height);
                 } else {
                     break;
                 }
@@ -119,6 +126,7 @@ public class Bom extends Entity {
         }
     }
 
+    //xử lý animation.
     public void setFrame(double time) {
         if (!isExplode) {
             frame += time * 5;
@@ -132,69 +140,74 @@ public class Bom extends Entity {
             }
         } else {
             frame += time * 10;
-            if(frame >= 5) {
+            if (frame >= 5) {
                 isEnd = true;
             }
         }
     }
+
+    //check va chạm vụ nổ.
     public void checkCollision() {
         if (isExplode) {
-            handleCollision(positionY/height, positionX/width);
+            handleCollision(positionY / height, positionX / width);
             //left
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                handleCollision(positionY/height, positionX/width-i);
-                if(map.arrMap[positionY/height][positionX/width-i] != 1) {
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                handleCollision(positionY / height, positionX / width - i);
+                if (map.arrMap[positionY / height][positionX / width - i] != 1) {
                     break;
                 }
             }
             //right
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                handleCollision(positionY/height, positionX/width+i);
-                if(map.arrMap[positionY/height][positionX/width+i] != 1) {
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                handleCollision(positionY / height, positionX / width + i);
+                if (map.arrMap[positionY / height][positionX / width + i] != 1) {
                     break;
                 }
             }
             //up
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                handleCollision(positionY/height-i, positionX/width);
-                if(map.arrMap[positionY/height-i][positionX/width] != 1) {
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                handleCollision(positionY / height - i, positionX / width);
+                if (map.arrMap[positionY / height - i][positionX / width] != 1) {
                     break;
                 }
             }
             //down
-            for(int i = 1; i <= map.getPowerBom(); i++) {
-                handleCollision(positionY/height+i, positionX/width);
-                if(map.arrMap[positionY/height+i][positionX/width] != 1) {
+            for (int i = 1; i <= map.getPowerBom(); i++) {
+                handleCollision(positionY / height + i, positionX / width);
+                if (map.arrMap[positionY / height + i][positionX / width] != 1) {
                     break;
                 }
             }
         }
     }
 
+    //xử lý va chạm vụ nổ.
     public void handleCollision(int posY, int posX) {
         //brick
-        if(map.arrMap[posY][posX] == 2) {
-            Integer i = posY + posX* map.getLenWidth()*10;
+        if (map.arrMap[posY][posX] == 2) {
+            Integer i = posY + posX * map.getLenWidth() * 10;
             map.walls.get(i).setDestroy(true);
         }
-        if(!map.player.isAntiBomb()) {
-            if(map.player.getRealPositionX() == posX*width && map.player.getRealPositionY() == posY*height) {
+        if (!map.player.isAntiBomb()) {
+            if (map.player.getRealPositionX() == posX * width && map.player.getRealPositionY() == posY * height) {
                 map.player.setDestroy(true);
             }
         }
-        for(int i = 0; i < map.enemies.size(); i++) {
-            if(map.enemies.get(i).getRealPositionX() == posX*width && map.enemies.get(i).getRealPositionY() == posY*height) {
+        for (int i = 0; i < map.enemies.size(); i++) {
+            if (map.enemies.get(i).getRealPositionX() == posX * width && map.enemies.get(i).getRealPositionY() == posY * height) {
                 map.enemies.get(i).setDestroy(true);
             }
         }
-        for(int i = 0; i < map.boms.size(); i++) {
-            if(map.boms.get(i).positionX == posX * width && map.boms.get(i).positionY == posY * height) {
+        for (int i = 0; i < map.boms.size(); i++) {
+            if (map.boms.get(i).positionX == posX * width && map.boms.get(i).positionY == posY * height) {
                 map.boms.get(i).timeBom = 0;
             }
         }
     }
+
+    //âm thanh nổ.
     public void playSound() {
-        if(isExplode) {
+        if (isExplode) {
             soundBom.play();
         }
     }

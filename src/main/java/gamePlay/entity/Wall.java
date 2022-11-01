@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import gamePlay.GamePlay;
 import gamePlay.entity.Entity;
 
-public class Wall extends Entity{
+public class Wall extends Entity {
     public Wall(int positionX, int positionY) {
         Image newImage = new Image("resource/image/blocks3.png");
         width = (int) ((newImage.getWidth() - 7) / 8);

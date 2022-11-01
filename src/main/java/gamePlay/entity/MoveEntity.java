@@ -54,6 +54,7 @@ public abstract class MoveEntity extends Entity {
         return velocity;
     }
 
+    //xử lý di chuyển lên.
     public void moveUp(int[][] mapArr) {
         if (proviso(mapArr[realPositionY / height - 1][realPositionX / width])) {
             if (positionX < realPositionX) {
@@ -80,6 +81,8 @@ public abstract class MoveEntity extends Entity {
         }
     }
 
+
+    //xử lý di chuyển xuống.
     public void moveDown(int[][] mapArr) {
         if (proviso(mapArr[realPositionY / height + 1][realPositionX / width])) {
             if (positionX < realPositionX) {
@@ -106,6 +109,7 @@ public abstract class MoveEntity extends Entity {
         }
     }
 
+    //xử lý di chuyển sang trái.
     public void moveLeft(int[][] mapArr) {
         if (proviso(mapArr[realPositionY / height][realPositionX / width - 1])) {
             if (positionY > realPositionY) {
@@ -132,6 +136,7 @@ public abstract class MoveEntity extends Entity {
         }
     }
 
+    //xử lý di chuyển sang phải.
     public void moveRight(int[][] mapArr) {
         if (proviso(mapArr[realPositionY / height][realPositionX / width + 1])) {
             if (positionY > realPositionY) {
@@ -158,6 +163,7 @@ public abstract class MoveEntity extends Entity {
         }
     }
 
+    //xử lý di chuyển xuyên tường.
     public boolean proviso(int number) {
         if (isCanMoveBrick()) {
             if (number != 0) {

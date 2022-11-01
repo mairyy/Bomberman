@@ -14,7 +14,8 @@ public class SoundGame {
     final private MediaPlayer soundPlayerDead;
     final private MediaPlayer musicMenu;
     final private MediaPlayer soundClick;
-    public SoundGame () {
+
+    public SoundGame() {
         Media newSound = new Media(new File("res/resource/music/Sounds/Player/playerMove.wav").toURI().toString());
         soundPlayerMove = new MediaPlayer(newSound);
         newSound = new Media(new File("res/resource/music/Sounds/Player/Player Dead.wav").toURI().toString());
@@ -31,9 +32,10 @@ public class SoundGame {
         });
     }
 
+    //sound move.
     public void playSoundMove(List<KeyCode> events) {
         if (events.contains(KeyCode.UP) || events.contains(KeyCode.DOWN)
-        || events.contains(KeyCode.LEFT) || events.contains(KeyCode.RIGHT)) {
+                || events.contains(KeyCode.LEFT) || events.contains(KeyCode.RIGHT)) {
             soundPlayerMove.setMute(false);
             soundPlayerMove.play();
         } else {
@@ -41,12 +43,14 @@ public class SoundGame {
         }
     }
 
+    //nhân vật chết.
     public void playSoundPlayerDead(Map map) {
-        if(map.player.isDestroy()) {
+        if (map.player.isDestroy()) {
             soundPlayerDead.play();
         }
     }
 
+    //tiếng game.
     public void playSoundMenu() {
         musicMenu.setOnEndOfMedia(new Runnable() {
             @Override
@@ -57,19 +61,22 @@ public class SoundGame {
         musicMenu.play();
     }
 
+    // play sound.
     public void playSound(Map map, List<KeyCode> events) {
         musicMenu.stop();
         playSoundMove(events);
         playSoundPlayerDead(map);
-        for(int i = 0; i < map.boms.size(); i++) {
+        for (int i = 0; i < map.boms.size(); i++) {
             map.boms.get(i).playSound();
         }
     }
 
+    //dừng tiếng menu.
     public void closeMenu() {
         musicMenu.stop();
     }
 
+    //dừng tiếng game.
     public void close() {
         soundPlayerDead.stop();
         soundPlayerMove.stop();
