@@ -1,7 +1,6 @@
 MenuGame\LevelLayer$3.class
 MenuGame\BombermanGame$1.class
 gamePlay\SoundGame$2.class
-MenuGame\HighScore\HighScoreLayer.class
 MenuGame\MenuControl$1.class
 MenuGame\PauseLayer.class
 MenuGame\SOUND.class

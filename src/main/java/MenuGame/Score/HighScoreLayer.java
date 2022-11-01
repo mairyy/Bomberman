@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 
-public class HighScoreLayer extends Score {
+public class HighScoreLayer extends Score implements Text {
     public boolean isHighScoreLayer = false;
     public static Sprite highScoreImg = new Sprite(new Image("highScoreLayer.png"), 0, 0, 0, 0);
     static String[] ranking = new String[6];

@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class ScoreBar extends Score {
+public class ScoreBar extends Score implements Text {
     public void load() {
 
     }
@@ -29,11 +29,11 @@ public class ScoreBar extends Score {
                 break;
         }
 
-        StringBuffer s = new StringBuffer("LEVEL: "+ level + "  ");
-        s.append(scoreStr).append(": ").append(BombermanGame.game.score).append("  ");
+        StringBuffer s = new StringBuffer("LEVEL: "+ level + " ");
+        s.append(scoreStr).append(": ").append(BombermanGame.game.score).append(" ");
         s.append(timeStr).append(": ").append(String.format("%.0f", BombermanGame.game.maxTimeGame - BombermanGame.game.timeGame));
         drawText(gc, Color.WHITE, bodyFont, s.toString(), 10, 35);
-        int itemPositionX = 560;
+        int itemPositionX = 540;
         for (Item i : BombermanGame.game.map.removeItems) {
             i.setPosition(itemPositionX, 10);
             i.setHeight(30);

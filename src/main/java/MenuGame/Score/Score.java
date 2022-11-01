@@ -3,20 +3,10 @@ package MenuGame.Score;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.io.*;
 
-public abstract class Score {
-    protected Font titleFont = Font.font("Comic Sans MS", FontWeight.BOLD, 30);
-    protected Font bodyFont = Font.font("Comic Sans MS", FontWeight.BOLD, 25);
-    protected final String scoreStr = "SCORE";
-    protected final String timeStr = "TIME";
-    protected final String levelStr = "LEVEL";
-    protected final String easy = "EASY";
-    protected final String medium = "MEDIUM";
-    protected final String hard = "HARD";
-
+public abstract class Score implements Text {
     protected String readFile(File path) {
         StringBuffer ranking = new StringBuffer();
         try {
