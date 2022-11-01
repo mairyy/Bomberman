@@ -54,3 +54,4 @@ Phiên bản mô phỏng trò chơi Bomberman kinh điển của NES bằng ngô
   * <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/powerUpBom.png" width="25">`powerUpBom` làm tăng phạm vi ảnh hướng của `Bom`
   * <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/powerUpSpeed.png" width="25">`powerUpSpeed` tăng tốc độ của `Player`
   * <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/timeUp.png" width="25">`timeUp` cộng thêm thời gian của màn chơi
+  * <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/antiBom.png" width="25">`antiBom` giúp `Player` bất tử khi gặp `Bom`
