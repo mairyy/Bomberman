@@ -19,6 +19,7 @@ public class Background extends Entity {
         height = 50;
     }
 
+    //render background.
     public void render(GraphicsContext gc) {
         gc.drawImage(image, 0,0, 800, 800);
         for(int i = 0; i < 16; i++) {

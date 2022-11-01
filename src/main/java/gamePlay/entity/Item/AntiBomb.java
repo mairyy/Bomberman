@@ -19,6 +19,7 @@ public class AntiBomb extends Item{
         this.map = map;
     }
 
+    //check nếu gặp item thì người chơi sẽ không bị bom nổ.
     @Override
     public void update() {
         if(checkColling()) {

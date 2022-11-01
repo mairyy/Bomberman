@@ -20,6 +20,7 @@ public class AddBom extends Item {
         this.map = map;
     }
 
+    //check nếu gặp item thì tăng bom.
     @Override
     public void update() {
         if(checkColling()) {

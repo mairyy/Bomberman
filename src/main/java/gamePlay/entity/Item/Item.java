@@ -6,16 +6,8 @@ import gamePlay.entity.Entity;
 import java.sql.Struct;
 
 public class Item extends Entity {
+    //nhận đầu vào là map có các thông số game như player, enemy,...
     protected Map map;
-    private double timeEffect;
-
-    public void setTimeEffect(double timeEffect) {
-        this.timeEffect = timeEffect;
-    }
-
-    public double getTimeEffect() {
-        return timeEffect;
-    }
 
     public void update(){;}
     public boolean checkColling() {
