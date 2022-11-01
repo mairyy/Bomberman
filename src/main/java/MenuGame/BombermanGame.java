@@ -183,12 +183,8 @@ public class BombermanGame extends Application {
                     status = STATUS.STOP;
                 }
 
-<<<<<<< HEAD
                 if(status.equals(STATUS.RESTART)) {
                     statusgame = STATUSGAME.NONE;
-=======
-                if (status.equals(STATUS.RESTART)) {
->>>>>>> b82524dbcbfdac1ca54a31bdb17dc9b785d2c3a9
                     if (menu.highScoreLayer.isHighScoreLayer) {
                         menu.highScoreLayer.resetRecord();
                         menu.highScoreLayer.load();
@@ -231,20 +227,12 @@ public class BombermanGame extends Application {
                     }
                 }
 
-<<<<<<< HEAD
                 if(music.equals(MUSIC.ON) && statusgame.equals(STATUSGAME.NONE)) {
-=======
-                if (music.equals(MUSIC.ON) && !status.equals(STATUS.GAMEPLAY)) {
->>>>>>> b82524dbcbfdac1ca54a31bdb17dc9b785d2c3a9
                     soundGame.playSoundMenu();
                 } else {
                     soundGame.closeMenu();
                 }
-<<<<<<< HEAD
                 if(sound.equals(SOUND.ON) && !statusgame.equals(STATUSGAME.NONE)) {
-=======
-                if (sound.equals(SOUND.ON) && status.equals(STATUS.GAMEPLAY)) {
->>>>>>> b82524dbcbfdac1ca54a31bdb17dc9b785d2c3a9
                     soundGame.playSound(game.map, game.events);
                 } else {
                     soundGame.close();
