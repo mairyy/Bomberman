@@ -6,6 +6,7 @@ public class SettingsLayer extends Menu {
     public void load() {
 
     }
+
     public void render(GraphicsContext gc) {
         BombermanGame.root.getChildren().remove(MenuControl.helpButton.circle);
         BombermanGame.root.getChildren().remove(MenuControl.settingButton.circle);

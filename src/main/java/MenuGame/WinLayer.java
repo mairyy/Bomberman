@@ -23,7 +23,7 @@ public class WinLayer extends Score implements Text {
         BombermanGame.root.getChildren().add(MenuControl.restartButton.circle);
         BombermanGame.root.getChildren().add(MenuControl.nextButton.circle);
         BombermanGame.root.getChildren().add(MenuControl.homeButton.circle);
-        drawText(gc, Color.BLACK, scoreFont, Integer.toString(BombermanGame.game.score), 350 ,580);
+        drawText(gc, Color.BLACK, scoreFont, Integer.toString(BombermanGame.game.score), 350, 580);
     }
 
     public void clear() {

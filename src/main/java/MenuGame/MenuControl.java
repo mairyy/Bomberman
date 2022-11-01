@@ -111,7 +111,7 @@ public class MenuControl {
                 public void handle(MouseEvent event) {
                     // index < 9 là các nút trừ music và sound
                     if (index < 9) BombermanGame.status = STATUS.values()[index];
-                    // index = 9 là nút music, index = 10 là nút sound
+                        // index = 9 là nút music, index = 10 là nút sound
                     else if (index == 9) {
                         if (BombermanGame.music.equals(MUSIC.OFF)) {
                             circleButtons.get(index).setImage(buttonImage);

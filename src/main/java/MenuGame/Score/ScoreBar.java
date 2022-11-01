@@ -29,7 +29,7 @@ public class ScoreBar extends Score implements Text {
                 break;
         }
 
-        StringBuffer s = new StringBuffer("LEVEL: "+ level + " ");
+        StringBuffer s = new StringBuffer("LEVEL: " + level + " ");
         s.append(scoreStr).append(": ").append(BombermanGame.game.score).append(" ");
         s.append(timeStr).append(": ").append(String.format("%.0f", BombermanGame.game.maxTimeGame - BombermanGame.game.timeGame));
         drawText(gc, Color.WHITE, bodyFont, s.toString(), 10, 35);

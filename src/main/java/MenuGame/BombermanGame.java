@@ -27,11 +27,11 @@ enum SOUND {
 }
 
 
-
 public class BombermanGame extends Application {
     public enum LEVEL {
         EASY, MEDIUM, HARD, NONE
     }
+
     public static int number = 1;
     public static GamePlay game = new GamePlay(number);
     private SoundGame soundGame = new SoundGame();
@@ -47,6 +47,7 @@ public class BombermanGame extends Application {
     public void start(Stage theStage) {
         menu(theStage);
     }
+
     public void menu(Stage theStage) {
         theStage.setTitle("Bomberman");
 
@@ -74,13 +75,13 @@ public class BombermanGame extends Application {
                 if (status.equals(STATUS.BACK)) {
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
-                    if(root.getChildren().contains(menu.levelLayer.easyButton.rectangle)) {
+                    if (root.getChildren().contains(menu.levelLayer.easyButton.rectangle)) {
                         menu.levelLayer.clear();
                     }
-                    if(root.getChildren().contains(menu.musicButton.circle)) {
+                    if (root.getChildren().contains(menu.musicButton.circle)) {
                         menu.settingsLayer.clear();
                     }
-                    if(root.getChildren().contains(menu.restartButton.circle)) {
+                    if (root.getChildren().contains(menu.restartButton.circle)) {
                         menu.highScoreLayer.clear();
                     }
                     menu.homeLayer.render(gc);
@@ -116,7 +117,7 @@ public class BombermanGame extends Application {
                         }
                     }
 
-                    double time = 1.0* (currentTime - startNanotime[0]) / 1000000000;
+                    double time = 1.0 * (currentTime - startNanotime[0]) / 1000000000;
                     startNanotime[0] = currentTime;
                     game.start(theStage, theScene, gc);
                     game.map.update(time, game.events);
@@ -162,7 +163,7 @@ public class BombermanGame extends Application {
                     status = STATUS.STOP;
                 }
 
-                if(status.equals(STATUS.RESTART)) {
+                if (status.equals(STATUS.RESTART)) {
                     if (menu.highScoreLayer.isHighScoreLayer) {
                         menu.highScoreLayer.resetRecord();
                         menu.highScoreLayer.load();
@@ -174,16 +175,16 @@ public class BombermanGame extends Application {
                     }
                 }
 
-                if(status.equals(STATUS.NEXT)) {
-                    if(level.equals(LEVEL.EASY)) {
+                if (status.equals(STATUS.NEXT)) {
+                    if (level.equals(LEVEL.EASY)) {
                         level = LEVEL.MEDIUM;
                         number = 2;
                         game = new GamePlay(number);
-                    } else if(level.equals(LEVEL.MEDIUM)) {
+                    } else if (level.equals(LEVEL.MEDIUM)) {
                         level = LEVEL.HARD;
                         number = 3;
                         game = new GamePlay(number);
-                    }  else if(level.equals(LEVEL.HARD)) {
+                    } else if (level.equals(LEVEL.HARD)) {
                         level = LEVEL.EASY;
                         number = 1;
                         game = new GamePlay(number);
@@ -204,12 +205,12 @@ public class BombermanGame extends Application {
                     }
                 }
 
-                if(music.equals(MUSIC.ON) && !status.equals(STATUS.GAMEPLAY)) {
+                if (music.equals(MUSIC.ON) && !status.equals(STATUS.GAMEPLAY)) {
                     soundGame.playSoundMenu();
                 } else {
                     soundGame.closeMenu();
                 }
-                if(sound.equals(SOUND.ON) && status.equals(STATUS.GAMEPLAY)) {
+                if (sound.equals(SOUND.ON) && status.equals(STATUS.GAMEPLAY)) {
                     soundGame.playSound(game.map, game.events);
                 } else {
                     soundGame.close();
