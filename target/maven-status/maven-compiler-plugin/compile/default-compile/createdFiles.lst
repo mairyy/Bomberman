@@ -2,7 +2,6 @@ MenuGame\LevelLayer$3.class
 gamePlay\entity\BFS\Point.class
 MenuGame\BombermanGame$1.class
 gamePlay\SoundGame$2.class
-main\handleInput.class
 MenuGame\PauseLayer.class
 MenuGame\SOUND.class
 gamePlay\GamePlay$1.class
@@ -28,7 +27,6 @@ gamePlay\SoundGame.class
 gamePlay\entity\Item\Item.class
 gamePlay\entity\Item\MoveBrick.class
 gamePlay\entity\Item\AntiBomb.class
-main\parameterGame.class
 MenuGame\SettingsLayer.class
 MenuGame\LevelLayer$1.class
 Main.class
