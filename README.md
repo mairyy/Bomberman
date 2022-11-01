@@ -7,15 +7,25 @@ Phiên bản mô phỏng trò chơi Bomberman kinh điển của NES bằng ngô
 ***
 ## Mô tả các chức năng được cài đặt trong game
 ### Game gồm các chức năng:
-* Tại màn hình chính có:
+* Tại màn hình chính: 
   * Xem và reset kỉ lục
   * Cài đặt âm thanh: tắt/bật
   * Hướng dẫn chơi game
   * Chọn level chơi: game gồm 3 level: EASY, MEDIUM, HARD
+
+<img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/mainMenu.png" width="180"> <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/highScore.png" width="180"> <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/setting.png" width="180"> <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/help.png" width="180"> <img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/level.png" width="180">
 * Tạm dừng màn chơi, cho phép lựa chọn chơi lại, tiếp tục hoặc trở về màn hình chính
+<img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/pause.png" width="180">
+
 * Khi thắng có thể lựa chọn chơi lại màn chơi đó, chơi màn chơi kế tiếp hoặc trở về màn hình chính
+<img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/win.png" width="180">
+
 * Khi thua có thể lựa chọn chơi lại màn chơi đó hoặc trở về màn hình chính
-* Tại màn hình game, phía trên sẽ hiện thị: level, điểm và thời gian còn lại
+<img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/lose.png" width="180">
+
+* Tại màn hình game, phía trên sẽ hiện thị: level, điểm, thời gian còn lại, các `Item` đã ăn được và nút pause
+<img src="https://github.com/mairyy/TestJavaFx1/blob/main/Picture/scoreBar.png" width="480">
+
 ### Mô tả luật chơi: 
 * `Player` sẽ có một khoảng thời gian cố định để vượt tiêu diệt hết các `Enemy` và vượt qua màn chơi. 
 * Càng tiêu diệt `Enemy` nhanh thì càng được cộng nhiều điểm. 
