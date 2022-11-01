@@ -18,6 +18,10 @@ enum STATUS {
     START, HELPMENU, HIGHSCORE, SETTINGS, BACK, RESTART, NEXT, HOME, PAUSE, STOP, GAMEPLAY
 }
 
+enum STATUSGAME {
+    PLAY, WIN, LOSE, NONE
+}
+
 enum MUSIC {
     ON, OFF
 }
@@ -42,6 +46,7 @@ public class BombermanGame extends Application {
     public static LEVEL level = LEVEL.NONE;
     public static MUSIC music = MUSIC.ON;
     public static SOUND sound = SOUND.ON;
+    public static STATUSGAME statusgame = STATUSGAME.NONE;
 
     @Override
     public void start(Stage theStage) {
@@ -66,12 +71,14 @@ public class BombermanGame extends Application {
         AnimationTimer time = new AnimationTimer() {
             public void handle(long currentTime) {
                 if (status.equals(STATUS.HELPMENU)) {
+                    statusgame = STATUSGAME.NONE;
                     clearScreen(gc);
                     menu.helpLayer.render(gc);
                     status = STATUS.STOP;
                 }
 
                 if (status.equals(STATUS.BACK)) {
+                    statusgame = STATUSGAME.NONE;
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
                     if(root.getChildren().contains(menu.levelLayer.easyButton.rectangle)) {
@@ -88,6 +95,7 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.START)) {
+                    statusgame = STATUSGAME.NONE;
                     if (root.getChildren().contains(menu.restartButton.circle)) {
                         status = STATUS.GAMEPLAY;
                     } else {
@@ -99,12 +107,14 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.SETTINGS)) {
+                    statusgame = STATUSGAME.NONE;
                     clearScreen(gc);
                     menu.settingsLayer.render(gc);
                     status = STATUS.STOP;
                 }
 
                 if (status.equals(STATUS.GAMEPLAY)) {
+                    statusgame = STATUSGAME.PLAY;
                     menu.highScoreLayer.isHighScoreLayer = false;
                     clearScreen(gc);
                     root.getChildren().remove(menu.backButton.circle);
@@ -131,11 +141,19 @@ public class BombermanGame extends Application {
                         System.out.println(game.score + " " + game.timeGame);
                         clearScreen(gc);
                         if (!game.map.player.isDestroy()) {
+                            statusgame = STATUSGAME.WIN;
+                            if(music.equals(MUSIC.ON)) {
+                                soundGame.playSoundWin();
+                            }
                             root.getChildren().remove(menu.pauseButton.circle);
                             menu.highScoreLayer.writeRecord();
                             menu.highScoreLayer.load();
                             menu.winLayer.render(gc);
                         } else {
+                            statusgame = STATUSGAME.LOSE;
+                            if(music.equals(music.ON)) {
+                                soundGame.playSoundLose();
+                            }
                             root.getChildren().remove(menu.pauseButton.circle);
                             menu.gameOver.render(gc);
                         }
@@ -145,12 +163,14 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.PAUSE)) {
+                    statusgame = STATUSGAME.NONE;
                     root.getChildren().remove(menu.pauseButton.circle);
                     menu.pauseLayer.render(gc);
                     status = STATUS.STOP;
                 }
 
                 if (status.equals(STATUS.HOME)) {
+                    statusgame = STATUSGAME.NONE;
                     clearScreen(gc);
                     game = new GamePlay(number);
                     game.start(theStage, theScene, gc);
@@ -163,6 +183,7 @@ public class BombermanGame extends Application {
                 }
 
                 if(status.equals(STATUS.RESTART)) {
+                    statusgame = STATUSGAME.NONE;
                     if (menu.highScoreLayer.isHighScoreLayer) {
                         menu.highScoreLayer.resetRecord();
                         menu.highScoreLayer.load();
@@ -192,6 +213,7 @@ public class BombermanGame extends Application {
                 }
 
                 if (status.equals(STATUS.HIGHSCORE)) {
+                    statusgame = STATUSGAME.NONE;
                     clearScreen(gc);
                     try {
                         if (root.getChildren().contains(menu.highScoreButton.circle)) {
@@ -204,12 +226,12 @@ public class BombermanGame extends Application {
                     }
                 }
 
-                if(music.equals(MUSIC.ON) && !status.equals(STATUS.GAMEPLAY)) {
+                if(music.equals(MUSIC.ON) && statusgame.equals(STATUSGAME.NONE)) {
                     soundGame.playSoundMenu();
                 } else {
                     soundGame.closeMenu();
                 }
-                if(sound.equals(SOUND.ON) && status.equals(STATUS.GAMEPLAY)) {
+                if(sound.equals(SOUND.ON) && !statusgame.equals(STATUSGAME.NONE)) {
                     soundGame.playSound(game.map, game.events);
                 } else {
                     soundGame.close();
